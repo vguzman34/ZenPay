@@ -1,8 +1,8 @@
--- Seed admin user password: admin123 (BCrypt hash)
+-- Seed admin user password: Admin123 (BCrypt hash)
 INSERT INTO users (id, email, password, full_name, phone, photo_url, role, enabled, account_non_locked, last_login_at, created_at, updated_at)
 VALUES
-    (uuid_generate_v4(), 'demo@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Usuario Demo', '+573001234567', 'https://ui-avatars.com/api/?name=Usuario+Ddemo&background=6C63FF&color=fff', 'ROLE_ADMIN', true, true, NOW(), NOW(), NOW()),
-    (uuid_generate_v4(), 'demo2@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Demo User', '+573009876543', 'https://ui-avatars.com/api/?name=Demo+User&background=FF6B6B&color=fff', 'ROLE_USER', true, true, NOW(), NOW(), NOW());
+    (uuid_generate_v4(), 'cliente@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Vanesa Gómez', '+573001234567', 'https://ui-avatars.com/api/?name=Vanesa+Gomez&background=6C63FF&color=fff', 'ROLE_ADMIN', true, true, NOW(), NOW(), NOW()),
+    (uuid_generate_v4(), 'usuario@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Carlos López', '+573009876543', 'https://ui-avatars.com/api/?name=Carlos+Lopez&background=FF6B6B&color=fff', 'ROLE_USER', true, true, NOW(), NOW(), NOW());
 
 DO $$
 DECLARE
@@ -13,8 +13,8 @@ DECLARE
     v_digital_id UUID;
     v_admin_savings_id UUID;
 BEGIN
-    SELECT id INTO v_admin_id FROM users WHERE email = 'demo@zenpay.com';
-    SELECT id INTO v_user_id FROM users WHERE email = 'demo2@zenpay.com';
+    SELECT id INTO v_admin_id FROM users WHERE email = 'cliente@zenpay.com';
+    SELECT id INTO v_user_id FROM users WHERE email = 'usuario@zenpay.com';
 
     -- Admin accounts
     INSERT INTO accounts (id, user_id, account_number, account_type, currency, balance, available_balance, status, opened_at, created_at, updated_at)
@@ -43,14 +43,14 @@ BEGIN
     -- Cards for admin
     INSERT INTO cards (id, user_id, account_id, card_type, status, card_number, card_holder_name, expiration_date, cvv, credit_limit, used_limit, available_limit, current_balance, payment_date, cutoff_date, is_virtual, issued_at, created_at, updated_at)
     VALUES
-        (uuid_generate_v4(), v_admin_id, v_admin_savings_id, 'VISA_INFINITE', 'ACTIVE', '**** **** **** 1234', 'Vanessa Admin', '12/28', 'encrypted_123', 10000000.00, 2500000.00, 7500000.00, 2500000.00, 15, 10, false, NOW() - INTERVAL '1 year', NOW(), NOW()),
-        (uuid_generate_v4(), v_admin_id, v_admin_savings_id, 'MASTERCARD_BLACK', 'ACTIVE', '**** **** **** 5678', 'Vanessa Admin', '08/27', 'encrypted_456', 8000000.00, 1000000.00, 7000000.00, 1000000.00, 20, 15, false, NOW() - INTERVAL '6 months', NOW(), NOW());
+        (uuid_generate_v4(), v_admin_id, v_admin_savings_id, 'VISA_INFINITE', 'ACTIVE', '**** **** **** 1234', 'Vanesa Gómez', '12/28', 'encrypted_123', 10000000.00, 2500000.00, 7500000.00, 2500000.00, 15, 10, false, NOW() - INTERVAL '1 year', NOW(), NOW()),
+        (uuid_generate_v4(), v_admin_id, v_admin_savings_id, 'MASTERCARD_BLACK', 'ACTIVE', '**** **** **** 5678', 'Vanesa Gómez', '08/27', 'encrypted_456', 8000000.00, 1000000.00, 7000000.00, 1000000.00, 20, 15, false, NOW() - INTERVAL '6 months', NOW(), NOW());
 
     -- Cards for user
     INSERT INTO cards (id, user_id, account_id, card_type, status, card_number, card_holder_name, expiration_date, cvv, credit_limit, used_limit, available_limit, current_balance, payment_date, cutoff_date, is_virtual, issued_at, created_at, updated_at)
     VALUES
-        (uuid_generate_v4(), v_user_id, v_savings_id, 'DEBIT_PREMIUM', 'ACTIVE', '**** **** **** 9012', 'Test User', '10/28', 'encrypted_789', 3000000.00, 500000.00, 2500000.00, 500000.00, 10, 5, false, NOW() - INTERVAL '3 months', NOW(), NOW()),
-        (uuid_generate_v4(), v_user_id, v_digital_id, 'VIRTUAL', 'ACTIVE', '**** **** **** 3456', 'Test User', '06/27', 'encrypted_000', 1000000.00, 0.00, 1000000.00, 0.00, NULL, NULL, true, NOW() - INTERVAL '1 month', NOW(), NOW());
+        (uuid_generate_v4(), v_user_id, v_savings_id, 'DEBIT_PREMIUM', 'ACTIVE', '**** **** **** 9012', 'Carlos López', '10/28', 'encrypted_789', 3000000.00, 500000.00, 2500000.00, 500000.00, 10, 5, false, NOW() - INTERVAL '3 months', NOW(), NOW()),
+        (uuid_generate_v4(), v_user_id, v_digital_id, 'VIRTUAL', 'ACTIVE', '**** **** **** 3456', 'Carlos López', '06/27', 'encrypted_000', 1000000.00, 0.00, 1000000.00, 0.00, NULL, NULL, true, NOW() - INTERVAL '1 month', NOW(), NOW());
 
     -- Movements for admin savings account
     INSERT INTO account_movements (id, account_id, type, status, amount, balance_before, balance_after, description, category, reference, counterparty, created_at)
@@ -159,6 +159,4 @@ BEGIN
     INSERT INTO devices (id, user_id, device_name, device_type, os, browser, ip_address, location, is_trusted, last_used_at, created_at)
     VALUES
         (uuid_generate_v4(), v_admin_id, 'Mi PC', 'DESKTOP', 'Windows 11', 'Chrome', '192.168.1.100', 'Bogotá, Colombia', true, NOW(), NOW()),
-        (uuid_generate_v4(), v_admin_id, 'iPhone 15', 'MOBILE', 'iOS 17', 'Safari', '192.168.1.101', 'Bogotá, Colombia', false, NOW() - INTERVAL '5 days', NOW() - INTERVAL '30 days');
-
-END $$;
+        (uuid_generate_v4(), v_admin_id, 'iPhone 15', 'MOBILE', 'iOS 17', 'Safari', '192.168.1.101', 'Bogotá, Colombia', false, NOW() - INTERVAL '5 days', NOW() - INTERVAL '30 days'); aqui esta cambiala esta es v8
