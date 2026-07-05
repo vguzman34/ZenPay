@@ -146,7 +146,7 @@ DECLARE
     v_ref_qr INTEGER := 600;
 BEGIN
 
-    SELECT id INTO v_admin_id FROM users WHERE email = 'vanessa@zenpay.com';
+    SELECT id INTO v_admin_id FROM users WHERE email = 'demo@zenpay.com';
     SELECT id INTO v_user_id FROM users WHERE email = 'user@zenpay.com';
 
     SELECT id, balance INTO v_admin_savings, v_admin_savings_bal FROM accounts WHERE user_id = v_admin_id AND account_type = 'SAVINGS';

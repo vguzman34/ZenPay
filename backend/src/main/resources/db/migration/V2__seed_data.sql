@@ -1,8 +1,8 @@
 -- Seed admin user password: admin123 (BCrypt hash)
 INSERT INTO users (id, email, password, full_name, phone, photo_url, role, enabled, account_non_locked, last_login_at, created_at, updated_at)
 VALUES
-    (uuid_generate_v4(), 'vanessa@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Vanessa Admin', '+573001234567', 'https://ui-avatars.com/api/?name=Vanessa+Admin&background=6C63FF&color=fff', 'ROLE_ADMIN', true, true, NOW(), NOW(), NOW()),
-    (uuid_generate_v4(), 'user@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Test User', '+573009876543', 'https://ui-avatars.com/api/?name=Test+User&background=FF6B6B&color=fff', 'ROLE_USER', true, true, NOW(), NOW(), NOW());
+    (uuid_generate_v4(), 'demo@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Usuario Demo', '+573001234567', 'https://ui-avatars.com/api/?name=Usuario+Ddemo&background=6C63FF&color=fff', 'ROLE_ADMIN', true, true, NOW(), NOW(), NOW()),
+    (uuid_generate_v4(), 'demo2@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Demo User', '+573009876543', 'https://ui-avatars.com/api/?name=Demo+User&background=FF6B6B&color=fff', 'ROLE_USER', true, true, NOW(), NOW(), NOW());
 
 DO $$
 DECLARE
@@ -13,8 +13,8 @@ DECLARE
     v_digital_id UUID;
     v_admin_savings_id UUID;
 BEGIN
-    SELECT id INTO v_admin_id FROM users WHERE email = 'vanessa@zenpay.com';
-    SELECT id INTO v_user_id FROM users WHERE email = 'user@zenpay.com';
+    SELECT id INTO v_admin_id FROM users WHERE email = 'demo@zenpay.com';
+    SELECT id INTO v_user_id FROM users WHERE email = 'demo2@zenpay.com';
 
     -- Admin accounts
     INSERT INTO accounts (id, user_id, account_number, account_type, currency, balance, available_balance, status, opened_at, created_at, updated_at)

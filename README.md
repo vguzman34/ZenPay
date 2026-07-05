@@ -6,7 +6,7 @@ Plataforma financiera digital premium construida con **Angular 21** + **Spring B
 
 - **Frontend**: https://zen-pay-5cep.vercel.app
 - **Backend**: https://zenpay-api.onrender.com
-- **Credenciales demo**: `vanessa@zenpay.com` / `admin123`
+- **Credenciales demo**: `demo@zenpay.com` / `admin123`
 
 ## 🛠 Stack
 
