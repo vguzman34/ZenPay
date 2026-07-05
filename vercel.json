@@ -3,7 +3,7 @@
   "framework": "angular",
   "buildCommand": "npx ng build --configuration production",
   "outputDirectory": "dist/ZenPay/browser",
-  "installCommand": "npm ci",
+  "installCommand": "npm install --legacy-peer-deps",
   "rewrites": [
     {
       "source": "/((?!api/).*)",
