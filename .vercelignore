@@ -1,7 +1,5 @@
 backend/
-node_modules/
 .angular/
-src/
 *.log
 *.bat
 *.ps1
