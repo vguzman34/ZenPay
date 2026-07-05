@@ -1,0 +1,106 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">Recargas</h1>
+    <p class="page-subtitle">Recarga tu celular al instante</p>
+  </header>
+
+  <div class="glass-card form-card">
+    <h2 class="section-title">Nueva Recarga</h2>
+
+    <div class="form-group">
+      <label class="form-label">Operador</label>
+      <div class="operator-grid">
+        @for (op of operators; track op.id) {
+          <div class="operator-card" [class.selected]="selectedOperator() === op.id" (click)="selectOperator(op.id)">
+            <div class="operator-logo" [style.background]="op.color">
+              <span class="operator-emoji">{{ op.name === 'Claro' ? '📶' : op.name === 'Movistar' ? '🌐' : op.name === 'Tigo' ? '📱' : op.name === 'WOM' ? '💜' : '🏢' }}</span>
+            </div>
+            <span class="operator-name">{{ op.name }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Número de celular</label>
+      <input class="form-input" [(ngModel)]="phoneNumber" type="tel" placeholder="Ej: 3001234567" maxlength="10" />
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Monto</label>
+      <div class="amount-pills">
+        @for (amt of quickAmounts; track amt) {
+          <button class="amount-pill" [class.active]="amount() === amt" (click)="setQuickAmount(amt)">
+            {{ formatCurrency(amt) }}
+          </button>
+        }
+      </div>
+      <div class="custom-amount">
+        <span class="custom-amount-prefix">$</span>
+        <input class="form-input custom-amount-input" type="number" [ngModel]="amount()" (ngModelChange)="amount.set($event)" placeholder="Otro monto" />
+      </div>
+    </div>
+
+    @if (errorMessage()) {
+      <div class="error-message">⚠️ {{ errorMessage() }}</div>
+    }
+
+    <button class="btn btn-primary btn-block" (click)="submitRecharge()">
+      Recargar {{ amount() ? formatCurrency(amount()) : '' }}
+    </button>
+
+    @if (showSuccess()) {
+      <div class="success-banner">✅ ¡Recarga exitosa!</div>
+    }
+  </div>
+
+  @if (frequentRecharges.length) {
+    <div class="glass-card frequent-card">
+      <h2 class="section-title">Recargas Frecuentes</h2>
+      <div class="frequent-list">
+        @for (fr of frequentRecharges; track fr.phone + fr.operator) {
+          <div class="frequent-item" (click)="setFrequent(fr.phone, fr.amount, fr.operator)">
+            <span class="frequent-icon">📱</span>
+            <div class="frequent-info">
+              <span class="frequent-number">{{ fr.phone }}</span>
+              <span class="frequent-detail">{{ fr.operator }} · {{ formatCurrency(fr.amount) }}</span>
+            </div>
+            <span class="frequent-action">Usar</span>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <div class="glass-card">
+    <h2 class="section-title">Historial de Recargas</h2>
+
+    @if (loading()) {
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+    } @else if (error()) {
+      <div style="text-align:center;padding:24px">
+        <p style="color:var(--color-text-secondary)">{{ error() }}</p>
+        <button class="btn btn-primary" style="margin-top:8px" (click)="loadRecharges()">Reintentar</button>
+      </div>
+    } @else {
+      @for (r of rechargeHistory(); track r.id) {
+        <div class="history-item">
+          <div class="history-info">
+            <span class="history-operator">{{ r.operator }}</span>
+            <span class="history-phone">{{ r.phoneNumber }}</span>
+            <span class="history-date">{{ r.createdAt }}</span>
+          </div>
+          <span class="history-amount">{{ formatCurrency(r.amount) }}</span>
+          <span class="status-badge {{ r.status.toLowerCase() }}">
+            {{ r.status === 'COMPLETED' ? '✔ Exitosa' : r.status === 'PENDING' ? '⏳ Pendiente' : '✖ Fallida' }}
+          </span>
+        </div>
+      }
+      @empty {
+        <p class="empty-text">No hay recargas realizadas</p>
+      }
+    }
+  </div>
+</div>

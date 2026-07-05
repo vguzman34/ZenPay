@@ -1,0 +1,158 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <div class="header-left">
+      <h1 class="page-title">Metas de Ahorro</h1>
+      <p class="page-subtitle">Define y sigue tus objetivos de ahorro</p>
+    </div>
+    @if (!loading()) {
+      <button class="add-goal-btn" (click)="toggleNewGoal()">+ Nueva Meta</button>
+    }
+  </header>
+
+  @if (loading()) {
+    <div class="loading-skeleton">
+      <div class="skeleton-card skeleton-pulse"></div>
+      <div class="skeleton-card skeleton-pulse"></div>
+      <div class="skeleton-card skeleton-pulse"></div>
+      <div class="skeleton-card skeleton-pulse"></div>
+    </div>
+  } @else if (error(); as errMsg) {
+    <div class="error-state">
+      <span class="material-symbols-rounded error-icon">error_outline</span>
+      <p class="error-message">{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadGoals()">Reintentar</button>
+    </div>
+  } @else if (goals().length === 0) {
+    <div class="empty-state">
+      <span class="material-symbols-rounded empty-icon">savings</span>
+      <p class="empty-message">No tienes metas de ahorro aún</p>
+      <button class="add-goal-btn" (click)="toggleNewGoal()">Crear primera meta</button>
+    </div>
+  } @else {
+    <section class="goals-grid">
+      @for (goal of goals(); track goal.id) {
+        <div class="goal-card glass-card"
+             [class.selected]="selectedGoalId() === goal.id"
+             [style.--goal-accent]="goal.colorHex"
+             (click)="selectGoal(goal.id)">
+          <div class="goal-card-icon">
+            <span class="material-symbols-rounded">{{ goal.icon }}</span>
+          </div>
+          <h3 class="goal-card-name">{{ goal.name }}</h3>
+          <div class="goal-card-amounts">
+            <span class="goal-amount-target">{{ formatCurrency(goal.targetAmount) }}</span>
+          </div>
+          <div class="goal-progress-bar">
+            <div class="goal-progress-fill" [style.width.%]="progressPercent(goal)" [style.background]="goal.colorHex"></div>
+          </div>
+          <div class="goal-card-footer">
+            <span class="goal-progress-text">{{ progressPercent(goal) }}% completado</span>
+            <span class="goal-deadline">{{ goal.deadline }}</span>
+          </div>
+        </div>
+      }
+    </section>
+  }
+
+  @if (selectedGoal(); as goal) {
+    <div class="detail-panel animate-slide-up">
+      <div class="detail-header">
+        <div class="detail-header-left">
+          <span class="detail-icon"><span class="material-symbols-rounded">{{ goal.icon }}</span></span>
+          <div>
+            <h2 class="detail-title">{{ goal.name }}</h2>
+            <span class="detail-deadline">Meta para {{ goal.deadline }}</span>
+          </div>
+        </div>
+        <button class="detail-close" (click)="closeDetail()"><span class="material-symbols-rounded">close</span></button>
+      </div>
+
+      <div class="detail-progress-section">
+        <div class="detail-progress-bar">
+          <div class="detail-progress-fill" [style.width.%]="progressPercent(goal)" [style.background]="goal.colorHex"></div>
+        </div>
+        <div class="detail-progress-info">
+          <span class="detail-progress-percent">{{ progressPercent(goal) }}% completado</span>
+          <span class="detail-progress-amounts">
+            {{ formatCurrency(goal.currentAmount) }} / {{ formatCurrency(goal.targetAmount) }}
+          </span>
+        </div>
+      </div>
+
+      <div class="detail-suggestion glass-card">
+        <span class="material-symbols-rounded suggestion-icon">lightbulb</span>
+        <div>
+          <span class="suggestion-label">Aporte mensual sugerido</span>
+          <span class="suggestion-amount">{{ formatCurrency(monthlySuggestion(goal)) }}</span>
+        </div>
+      </div>
+
+      <div class="contribute-section">
+        <h3 class="section-title">Realizar Aporte</h3>
+        @if (actionError(); as errMsg) {
+          <div class="action-error">{{ errMsg }}</div>
+        }
+        <div class="contribute-form">
+          <div class="contribute-input-wrapper">
+            <span class="contribute-currency">$</span>
+            <input type="number" class="contribute-input" placeholder="Monto a aportar"
+                   [value]="contributeAmount() || ''"
+                   (input)="onContributeAmountInput($event)" />
+          </div>
+          <button class="contribute-btn" (click)="contribute()" [disabled]="contributeAmount() <= 0">
+            Aportar
+          </button>
+        </div>
+      </div>
+
+      <div class="contributions-section">
+        <h3 class="section-title">Historial de Aportes</h3>
+        <div class="contributions-list">
+          @for (m of goalMovements(); track m.id) {
+            <div class="contribution-item">
+              <span class="contrib-date">{{ formatDate(m.createdAt) }}</span>
+              <span class="contrib-amount">+{{ formatCurrency(m.amount) }}</span>
+            </div>
+          } @empty {
+            <div class="contributions-empty">No hay aportes registrados</div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showNewGoalForm()) {
+    <div class="overlay" (click)="toggleNewGoal()">
+      <div class="new-goal-form glass-card" (click)="$event.stopPropagation()">
+        <div class="new-goal-header">
+          <h2 class="new-goal-title">Nueva Meta de Ahorro</h2>
+          <button class="detail-close" (click)="toggleNewGoal()"><span class="material-symbols-rounded">close</span></button>
+        </div>
+        <div class="new-goal-body">
+          @if (actionError(); as errMsg) {
+            <div class="action-error">{{ errMsg }}</div>
+          }
+          <div class="form-group">
+            <label class="form-label">Nombre de la meta</label>
+            <input type="text" class="form-input" placeholder="Ej: Casa, Viaje..."
+                   [value]="newGoalName()"
+                   (input)="newGoalName.set($any($event.target).value)" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Monto objetivo</label>
+            <input type="number" class="form-input" placeholder="Ej: 50000000"
+                   [value]="newGoalTarget() || ''"
+                   (input)="onNewGoalTargetInput($event)" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Fecha límite</label>
+            <input type="text" class="form-input" placeholder="Ej: Dic 2027"
+                   [value]="newGoalDeadline()"
+                   (input)="newGoalDeadline.set($any($event.target).value)" />
+          </div>
+          <button class="create-goal-btn" (click)="addNewGoal()">Crear Meta</button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

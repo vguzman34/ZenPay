@@ -1,0 +1,54 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">Perfil</h1>
+    <p class="page-subtitle">Información personal y configuración de cuenta</p>
+  </header>
+
+  @if (loading()) {
+    <div class="profile-content glass-card">
+      <div class="loading-state">
+        <p>Cargando perfil...</p>
+      </div>
+    </div>
+  } @else if (error(); as errMsg) {
+    <div class="profile-content glass-card">
+      <div class="error-state">
+        <span class="error-icon">⚠️</span>
+        <p class="error-text">{{ errMsg }}</p>
+        <button class="btn-retry" (click)="loadProfile()">Reintentar</button>
+      </div>
+    </div>
+  } @else {
+    @let user = profile()!;
+    <div class="profile-content glass-card">
+      <div class="profile-avatar-section">
+        <div class="profile-avatar">
+          <span>{{ getInitials(user.fullName) }}</span>
+        </div>
+        <div class="profile-badge">Premium</div>
+      </div>
+      <div class="profile-details">
+        <div class="profile-field">
+          <span class="field-label">Nombre completo</span>
+          <span class="field-value">{{ user.fullName }}</span>
+        </div>
+        <div class="profile-field">
+          <span class="field-label">Rol</span>
+          <span class="field-value">{{ user.role }}</span>
+        </div>
+        <div class="profile-field">
+          <span class="field-label">Email</span>
+          <span class="field-value">{{ user.email }}</span>
+        </div>
+        <div class="profile-field">
+          <span class="field-label">Teléfono</span>
+          <span class="field-value">{{ user.phone }}</span>
+        </div>
+        <div class="profile-field">
+          <span class="field-label">Miembro desde</span>
+          <span class="field-value">{{ formatDate(user.createdAt) }}</span>
+        </div>
+      </div>
+    </div>
+  }
+</div>

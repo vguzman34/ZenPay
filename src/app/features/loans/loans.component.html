@@ -1,0 +1,144 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <div class="header-left">
+      <h1 class="page-title">Mis Créditos</h1>
+      <p class="page-subtitle">Administra tus créditos y solicita nuevos préstamos</p>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-skeleton">
+      <div class="skeleton-card skeleton-pulse"></div>
+      <div class="skeleton-card skeleton-pulse"></div>
+      <div class="skeleton-card skeleton-pulse"></div>
+    </div>
+  } @else if (error(); as errMsg) {
+    <div class="error-state">
+      <span class="material-symbols-rounded error-icon">error_outline</span>
+      <p class="error-message">{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadLoans()">Reintentar</button>
+    </div>
+  } @else if (loans().length === 0) {
+    <div class="empty-state">
+      <span class="material-symbols-rounded empty-icon">account_balance</span>
+      <p class="empty-message">No tienes créditos activos</p>
+    </div>
+  } @else {
+    <section class="loans-grid">
+      @for (loan of loans(); track loan.id) {
+        <div class="loan-card glass-card"
+             [class.selected]="selectedLoanId() === loan.id"
+             (click)="selectLoan(loan.id)">
+          <div class="loan-card-accent" [style.background]="loanAccentColor(loan.type)"></div>
+          <div class="loan-card-header">
+            <div class="loan-card-header-left">
+              <span class="loan-card-icon">{{ loanDisplay(loan.type).icon }}</span>
+              <div>
+                <h3 class="loan-card-type">{{ loanDisplay(loan.type).label }}</h3>
+                <span class="loan-card-rate">{{ loan.interestRate }}% TAE</span>
+              </div>
+            </div>
+            <span class="status-badge status-{{ loan.status.toLowerCase() }}">{{ loan.status }}</span>
+          </div>
+          <div class="loan-card-amounts">
+            <div class="loan-amount-item">
+              <span class="loan-amount-label">Total</span>
+              <span class="loan-amount-value">{{ formatCurrency(loan.totalAmount) }}</span>
+            </div>
+            <div class="loan-amount-item">
+              <span class="loan-amount-label">Pendiente</span>
+              <span class="loan-amount-value remaining">{{ formatCurrency(loan.remainingAmount) }}</span>
+            </div>
+          </div>
+          <div class="loan-progress-section">
+            <div class="loan-progress-bar">
+              <div class="loan-progress-fill" [style.width.%]="progressPercent(loan)"></div>
+            </div>
+            <span class="loan-progress-text">{{ progressPercent(loan) }}% pagado ({{ loan.paidInstallments }}/{{ loan.totalInstallments }})</span>
+          </div>
+          <div class="loan-card-footer">
+            <div class="loan-next-payment">
+              <span class="next-payment-label">Próxima cuota</span>
+              <span class="next-payment-amount">{{ formatCurrency(loan.nextPaymentAmount) }}</span>
+              <span class="next-payment-date">Vence {{ loan.nextPaymentDate }}</span>
+            </div>
+          </div>
+        </div>
+      }
+    </section>
+  }
+
+  @if (selectedLoan(); as loan) {
+    <div class="detail-panel animate-slide-up">
+      <div class="detail-header">
+        <div class="detail-header-left">
+          <span class="detail-icon">{{ loanDisplay(loan.type).icon }}</span>
+          <div>
+            <h2 class="detail-title">{{ loanDisplay(loan.type).label }}</h2>
+            <span class="detail-rate">{{ loan.interestRate }}% TAE</span>
+          </div>
+        </div>
+        <div class="detail-header-right">
+          <span class="status-badge status-{{ loan.status.toLowerCase() }}">{{ loan.status }}</span>
+          <button class="detail-close" (click)="closeDetail()"><span class="material-symbols-rounded">close</span></button>
+        </div>
+      </div>
+
+      <div class="detail-summary">
+        <div class="summary-item">
+          <span class="summary-label">Total Crédito</span>
+          <span class="summary-value">{{ formatCurrency(loan.totalAmount) }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Saldo Pendiente</span>
+          <span class="summary-value remaining">{{ formatCurrency(loan.remainingAmount) }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Cuotas Pagadas</span>
+          <span class="summary-value">{{ loan.paidInstallments }} / {{ loan.totalInstallments }}</span>
+        </div>
+        <div class="summary-item">
+          <span class="summary-label">Próxima Cuota</span>
+          <span class="summary-value">{{ formatCurrency(loan.nextPaymentAmount) }}</span>
+        </div>
+      </div>
+
+      <div class="detail-progress-section">
+        <h3 class="section-title">Progreso de Pago</h3>
+        <div class="detail-progress-bar">
+          <div class="detail-progress-fill" [style.width.%]="progressPercent(loan)"></div>
+        </div>
+        <div class="detail-progress-info">
+          <span class="detail-progress-text">{{ progressPercent(loan) }}% pagado</span>
+          <span class="detail-progress-detail">{{ loan.paidInstallments }} de {{ loan.totalInstallments }} cuotas</span>
+        </div>
+      </div>
+
+      <div class="detail-installments-section">
+        <h3 class="section-title">Plan de Pagos</h3>
+        <div class="installments-table">
+          <div class="installments-table-header">
+            <span class="it-col-num">#</span>
+            <span class="it-col-date">Vencimiento</span>
+            <span class="it-col-amount">Monto</span>
+            <span class="it-col-status">Estado</span>
+            <span class="it-col-paid">Pagado</span>
+          </div>
+          @for (inst of installments(); track inst.id) {
+            <div class="installments-table-row" [class.paid]="inst.status === 'PAID'">
+              <span class="it-col-num">{{ inst.number }}</span>
+              <span class="it-col-date">{{ inst.dueDate }}</span>
+              <span class="it-col-amount">{{ formatCurrency(inst.amount) }}</span>
+              <span class="it-col-status">
+                <span class="inst-status status-{{ inst.status.toLowerCase() }}">{{ inst.status }}</span>
+              </span>
+              <span class="it-col-paid">{{ inst.paidDate || '—' }}</span>
+            </div>
+          } @empty {
+            <div class="installments-empty">No hay cuotas registradas</div>
+          }
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,100 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">🏧 Retiro sin Tarjeta</h1>
+    <p class="page-subtitle">Genera un código para retirar efectivo en cualquier cajero aliado</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="selectedTab() === 'generar'" (click)="selectedTab.set('generar')">🔑 Generar</button>
+    <button class="tab-btn" [class.active]="selectedTab() === 'historial'" (click)="selectedTab.set('historial')">📋 Historial</button>
+  </div>
+
+  @if (selectedTab() === 'generar') {
+    <section class="generate-section animate-slide-up">
+      @if (!generatedCode()) {
+        <div class="glass-card generate-form">
+          <label class="input-label">¿Cuánto deseas retirar?</label>
+          <div class="amount-input-wrapper">
+            <span class="amount-currency">$</span>
+            <input
+              type="number"
+              class="amount-input"
+              placeholder="100,000"
+              [ngModel]="amount()"
+              (ngModelChange)="amount.set($event)"
+              min="10000"
+              step="10000"
+            />
+            <span class="amount-currency-label">COP</span>
+          </div>
+          <p class="input-hint">Mínimo $10,000 COP · Máximo $3,000,000 COP</p>
+          <button class="btn-primary btn-generate" [disabled]="!amount() || amount() < 10000" (click)="generateCode()">
+            🔄 Generar Código
+          </button>
+        </div>
+      } @else {
+        @let code = generatedCode()!;
+        <div class="glass-card code-display-card">
+          <div class="code-header">
+            <span class="code-header-icon">✅</span>
+            <span class="code-header-text">Código Generado</span>
+          </div>
+
+          <div class="code-large">{{ code.code }}</div>
+          <p class="code-amount">por {{ formatCurrency(code.amount) }}</p>
+
+          <div class="qr-placeholder" [class.urgent]="isUrgent()">
+            <div class="qr-grid">
+              @for (row of qrPattern(); track $index) {
+                @for (bit of row; track $index) {
+                  <div class="qr-cell" [class.fill]="bit === '1'"></div>
+                }
+              }
+            </div>
+            <span class="qr-label">QR</span>
+          </div>
+
+          <div class="timer-section" [class.urgent]="isUrgent()">
+            <span class="timer-icon">⏱️</span>
+            <span class="timer-label">Tiempo restante:</span>
+            <span class="timer-value">{{ timerFormatted() }}</span>
+          </div>
+
+          <div class="code-actions">
+            <button class="btn-outline" routerLink="/atms">🏦 Retirar en Cajero</button>
+          </div>
+        </div>
+      }
+    </section>
+  }
+
+  @if (selectedTab() === 'historial') {
+    <section class="history-section animate-slide-up">
+      @if (history().length === 0) {
+        <div class="empty-state glass-card">
+          <span class="empty-icon">📭</span>
+          <p class="empty-text">No hay retiros aún</p>
+        </div>
+      } @else {
+        <div class="history-list">
+          @for (item of history(); track item.code + item.createdAt) {
+            <div class="history-item glass-card" [class]="getStatusClass(item.status)">
+              <div class="history-item-left">
+                <span class="history-amount">{{ formatCurrency(item.amount) }}</span>
+                <span class="history-date">{{ formatDate(item.createdAt) }}</span>
+              </div>
+              <div class="history-item-center">
+                <span class="history-code">{{ maskCode(item.code) }}</span>
+              </div>
+              <div class="history-item-right">
+                <span class="status-badge" [class]="getStatusClass(item.status)">
+                  {{ getStatusIcon(item.status) }} {{ getStatusLabel(item.status) }}
+                </span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </section>
+  }
+</div>

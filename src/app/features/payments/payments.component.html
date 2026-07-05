@@ -1,0 +1,109 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">Pago Servicios</h1>
+    <p class="page-subtitle">Paga tus servicios públicos y facturas</p>
+  </header>
+
+  <div class="glass-card form-card">
+    <h2 class="section-title">Pagar Servicio</h2>
+
+    <div class="form-group">
+      <label class="form-label">Tipo de servicio</label>
+      <div class="service-grid">
+        @for (svc of serviceTypes; track svc.id) {
+          <div class="service-card" [class.selected]="selectedServiceId() === svc.id" (click)="selectService(svc.id)">
+            <span class="service-icon">{{ svc.icon }}</span>
+            <span class="service-name">{{ svc.name }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (selectedService()) {
+      <div class="form-group">
+        <label class="form-label">Empresa</label>
+        <div class="company-list">
+          @for (comp of availableCompanies(); track comp) {
+            <div class="company-item" [class.selected]="selectedCompany() === comp" (click)="selectCompany(comp)">
+              {{ comp }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Código de referencia / Número de factura</label>
+        <input class="form-input" [ngModel]="referenceCode()" (ngModelChange)="setReference($event)" placeholder="Ej: REF-8952-01" />
+      </div>
+
+      @if (errorMessage()) {
+        <div class="error-message">⚠️ {{ errorMessage() }}</div>
+      }
+
+      <button class="btn btn-primary btn-block" (click)="payBill()">Pagar Factura</button>
+
+      @if (showSuccess()) {
+        <div class="success-banner">✅ ¡Pago exitoso!</div>
+      }
+    }
+  </div>
+
+  <div class="glass-card">
+    <h2 class="section-title">Facturas Pendientes</h2>
+
+    @if (loading()) {
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+    } @else if (error()) {
+      <div style="text-align:center;padding:24px">
+        <p style="color:var(--color-text-secondary)">{{ error() }}</p>
+        <button class="btn btn-primary" style="margin-top:8px" (click)="loadPayments()">Reintentar</button>
+      </div>
+    } @else {
+      @for (bill of pendingBills(); track bill.id) {
+        <div class="pending-item" (click)="payPendingBill(bill)">
+          <div class="pending-left">
+            <span class="pending-service">{{ categoryLabel(bill.category) }}</span>
+            <span class="pending-company">{{ bill.provider }}</span>
+            <span class="pending-ref">{{ bill.referenceCode }}</span>
+          </div>
+          <div class="pending-right">
+            <span class="pending-amount">{{ formatCurrency(bill.amount) }}</span>
+          </div>
+        </div>
+      }
+      @empty {
+        <p class="empty-text">No hay facturas pendientes</p>
+      }
+    }
+  </div>
+
+  <div class="glass-card">
+    <h2 class="section-title">Historial de Pagos</h2>
+
+    @if (loading()) {
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+      <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+    } @else if (error()) {
+      <div style="text-align:center;padding:24px">
+        <p style="color:var(--color-text-secondary)">{{ error() }}</p>
+        <button class="btn btn-primary" style="margin-top:8px" (click)="loadPayments()">Reintentar</button>
+      </div>
+    } @else {
+      @for (p of paidHistory(); track p.id) {
+        <div class="paid-item">
+          <div class="paid-info">
+            <span class="paid-service">{{ categoryLabel(p.category) }} · {{ p.provider }}</span>
+            <span class="paid-date">{{ p.paidAt }}</span>
+          </div>
+          <span class="paid-amount">{{ formatCurrency(p.amount) }}</span>
+          <span class="paid-badge">✔ Pagado</span>
+        </div>
+      }
+      @empty {
+        <p class="empty-text">No hay pagos realizados</p>
+      }
+    }
+  </div>
+</div>

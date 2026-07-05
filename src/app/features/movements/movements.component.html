@@ -1,0 +1,152 @@
+@if (loading()) {
+  <div class="page-container">
+    <div class="loading-skeleton">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-cards">
+        @for (_ of [1,2,3]; track _) {
+          <div class="skeleton-card glass-card"></div>
+        }
+      </div>
+    </div>
+  </div>
+} @else if (error(); as errMsg) {
+  <div class="page-container">
+    <div class="error-state glass-card">
+      <span class="material-symbols-rounded" style="font-size: 48px; color: var(--color-danger)">error</span>
+      <h2>Algo salió mal</h2>
+      <p>{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadTransactions()">Reintentar</button>
+    </div>
+  </div>
+} @else {
+  <div class="page-container animate-fade-in">
+    <header class="page-header">
+      <div class="header-left">
+        <h1 class="page-title">Movimientos</h1>
+        <p class="page-subtitle">Historial completo de tus transacciones</p>
+      </div>
+      <div class="header-right">
+        <button class="refresh-btn" (click)="loadTransactions()">
+          <span class="material-symbols-rounded">refresh</span> Actualizar
+        </button>
+      </div>
+    </header>
+
+    <section class="summary-cards">
+      <div class="summary-card glass-card income">
+        <span class="material-symbols-rounded summary-icon">trending_up</span>
+        <div class="summary-info">
+          <span class="summary-label">Ingresos Totales</span>
+          <span class="summary-value">{{ formatCurrency(totalIncome()) }}</span>
+        </div>
+      </div>
+      <div class="summary-card glass-card expense">
+        <span class="material-symbols-rounded summary-icon">trending_down</span>
+        <div class="summary-info">
+          <span class="summary-label">Gastos Totales</span>
+          <span class="summary-value">{{ formatCurrency(totalExpense()) }}</span>
+        </div>
+      </div>
+      <div class="summary-card glass-card net"
+           [class.positive]="netBalance() >= 0"
+           [class.negative]="netBalance() < 0">
+        <span class="material-symbols-rounded summary-icon">balance</span>
+        <div class="summary-info">
+          <span class="summary-label">Balance Neto</span>
+          <span class="summary-value">{{ netBalance() >= 0 ? '+' : '-' }}{{ formatCurrency(Math.abs(netBalance())) }}</span>
+        </div>
+      </div>
+    </section>
+
+    <div class="filter-bar glass-card">
+      <div class="filter-row">
+        <div class="date-filters">
+          <button class="filter-chip" [class.active]="dateFilter() === 'all'" (click)="setDateFilter('all')">Todo</button>
+          <button class="filter-chip" [class.active]="dateFilter() === 'today'" (click)="setDateFilter('today')">Hoy</button>
+          <button class="filter-chip" [class.active]="dateFilter() === 'week'" (click)="setDateFilter('week')">Semana</button>
+          <button class="filter-chip" [class.active]="dateFilter() === 'month'" (click)="setDateFilter('month')">Mes</button>
+          <button class="filter-chip" [class.active]="dateFilter() === 'year'" (click)="setDateFilter('year')">Año</button>
+        </div>
+        <div class="filter-actions">
+          <button class="filter-chip type-filter" [class.active]="typeFilter() === 'all'" (click)="setTypeFilter('all')">Todos</button>
+          <button class="filter-chip type-filter" [class.active]="typeFilter() === 'income'" (click)="setTypeFilter('income')"><span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle">trending_up</span> Ingresos</button>
+          <button class="filter-chip type-filter" [class.active]="typeFilter() === 'expense'" (click)="setTypeFilter('expense')"><span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle">trending_down</span> Gastos</button>
+        </div>
+      </div>
+
+      <div class="filter-row secondary">
+        <div class="search-box">
+          <span class="material-symbols-rounded search-icon">search</span>
+          <input class="search-input" type="text" placeholder="Buscar transacciones..." [value]="searchQuery()" (input)="setSearch($any($event.target).value)" />
+        </div>
+        <div class="filter-controls">
+          <select class="category-select" [value]="categoryFilter() === 'all' ? 'Todas' : categoryFilter()" (change)="setCategoryFilter($any($event.target).value)">
+            @for (cat of categories; track cat) {
+              <option [value]="cat">{{ cat }}</option>
+            }
+          </select>
+          <button class="sort-btn" (click)="setSort('date')">
+            <span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle">calendar_month</span> Fecha {{ sortBy() === 'date' ? (sortDir() === 'desc' ? '↓' : '↑') : '' }}
+          </button>
+          <button class="sort-btn" (click)="setSort('amount')">
+            <span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle">account_balance_wallet</span> Monto {{ sortBy() === 'amount' ? (sortDir() === 'desc' ? '↓' : '↑') : '' }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-info">
+      <span class="results-count">{{ filteredTransactions().length }} transacciones encontradas</span>
+    </div>
+
+    @if (transactions().length === 0) {
+      <div class="empty-state glass-card">
+        <span class="material-symbols-rounded empty-icon">receipt_long</span>
+        <h3 class="empty-title">Sin movimientos</h3>
+        <p class="empty-desc">Aún no hay movimientos registrados en tus cuentas</p>
+      </div>
+    } @else if (filteredTransactions().length === 0) {
+      <div class="empty-state glass-card">
+        <span class="material-symbols-rounded empty-icon">search</span>
+        <h3 class="empty-title">Sin resultados</h3>
+        <p class="empty-desc">No encontramos transacciones con los filtros seleccionados. Intenta cambiarlos.</p>
+        <button class="empty-action" (click)="setDateFilter('all'); setTypeFilter('all'); setCategoryFilter('Todas'); setSearch('')">
+          Limpiar filtros
+        </button>
+      </div>
+    } @else {
+      <div class="transactions-list animate-slide-up">
+        @for (tx of paginatedTransactions(); track tx.description + tx.dateRaw.getTime(); let i = $index) {
+          <div class="transaction-item" style="animation-delay: {{ i * 0.03 }}s">
+            <div class="tx-icon-wrapper" [class.income]="tx.type === 'INCOME'" [class.expense]="tx.type === 'EXPENSE'">
+              <span class="material-symbols-rounded tx-icon">{{ tx.icon }}</span>
+            </div>
+            <div class="tx-info">
+              <span class="tx-description">{{ tx.description }}</span>
+              <span class="tx-category">{{ tx.category }} · {{ tx.date }}</span>
+            </div>
+            <div class="tx-right">
+              <span class="tx-amount" [class.income]="tx.type === 'INCOME'" [class.expense]="tx.type === 'EXPENSE'">
+                {{ tx.type === 'INCOME' ? '+' : '-' }}{{ formatCurrency(tx.amount) }}
+              </span>
+              <span class="tx-status"
+                    [class.status-completed]="tx.status === 'COMPLETED'"
+                    [class.status-pending]="tx.status === 'PENDING'"
+                    [class.status-failed]="tx.status === 'FAILED'">
+                {{ tx.status === 'COMPLETED' ? '✓ Completado' : tx.status === 'PENDING' ? '○ Pendiente' : '✕ Fallido' }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (hasMore()) {
+        <div class="load-more">
+          <button class="load-more-btn" (click)="loadMore()">
+            Mostrar más ({{ filteredTransactions().length - paginatedTransactions().length }} restantes)
+          </button>
+        </div>
+      }
+    }
+  </div>
+}

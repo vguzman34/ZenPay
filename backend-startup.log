@@ -1,0 +1,978 @@
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+
+ :: Spring Boot ::                (v3.4.1)
+
+2026-07-04T13:11:30.191-05:00  INFO 14472 --- [zenpay-backend] [           main] com.zenpay.ZenPayApplication             : Starting ZenPayApplication v1.0.0 using Java 21.0.6 with PID 14472 (C:\Users\Vanes\Desktop\ZenPay\backend\target\zenpay-backend-1.0.0.jar started by Vanes in C:\)
+2026-07-04T13:11:30.296-05:00 DEBUG 14472 --- [zenpay-backend] [           main] com.zenpay.ZenPayApplication             : Running with Spring Boot v3.4.1, Spring v6.2.1
+2026-07-04T13:11:30.304-05:00  INFO 14472 --- [zenpay-backend] [           main] com.zenpay.ZenPayApplication             : No active profile set, falling back to 1 default profile: "default"
+2026-07-04T13:12:14.471-05:00  INFO 14472 --- [zenpay-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-07-04T13:12:20.137-05:00  INFO 14472 --- [zenpay-backend] [           main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 5302 ms. Found 24 JPA repository interfaces.
+2026-07-04T13:12:54.387-05:00  INFO 14472 --- [zenpay-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2026-07-04T13:12:54.934-05:00  INFO 14472 --- [zenpay-backend] [           main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-07-04T13:12:54.949-05:00  INFO 14472 --- [zenpay-backend] [           main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.34]
+2026-07-04T13:12:56.698-05:00  INFO 14472 --- [zenpay-backend] [           main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2026-07-04T13:12:56.763-05:00  INFO 14472 --- [zenpay-backend] [           main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 84879 ms
+2026-07-04T13:13:11.767-05:00  INFO 14472 --- [zenpay-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-07-04T13:13:19.356-05:00  INFO 14472 --- [zenpay-backend] [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@391dfe7c
+2026-07-04T13:13:19.381-05:00  INFO 14472 --- [zenpay-backend] [           main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-07-04T13:13:21.256-05:00  INFO 14472 --- [zenpay-backend] [           main] org.flywaydb.core.FlywayExecutor         : Database: jdbc:postgresql://localhost:5432/zenpay (PostgreSQL 17.10)
+2026-07-04T13:13:23.499-05:00  INFO 14472 --- [zenpay-backend] [           main] o.f.core.internal.command.DbMigrate      : Current version of schema "public": 12
+2026-07-04T13:13:23.566-05:00  INFO 14472 --- [zenpay-backend] [           main] o.f.core.internal.command.DbMigrate      : Schema "public" is up to date. No migration necessary.
+2026-07-04T13:13:25.476-05:00  INFO 14472 --- [zenpay-backend] [           main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2026-07-04T13:13:28.456-05:00  INFO 14472 --- [zenpay-backend] [           main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.6.4.Final
+2026-07-04T13:13:30.033-05:00  INFO 14472 --- [zenpay-backend] [           main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2026-07-04T13:13:40.656-05:00  INFO 14472 --- [zenpay-backend] [           main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-07-04T13:13:42.247-05:00  WARN 14472 --- [zenpay-backend] [           main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-07-04T13:13:42.560-05:00  INFO 14472 --- [zenpay-backend] [           main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 17.10
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2026-07-04T13:14:25.644-05:00  INFO 14472 --- [zenpay-backend] [           main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2026-07-04T13:14:26.483-05:00  INFO 14472 --- [zenpay-backend] [           main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-07-04T13:14:36.958-05:00 DEBUG 14472 --- [zenpay-backend] [           main] c.z.i.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-07-04T13:14:46.328-05:00  INFO 14472 --- [zenpay-backend] [           main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-07-04T13:14:57.160-05:00  WARN 14472 --- [zenpay-backend] [           main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2026-07-04T13:15:10.852-05:00  INFO 14472 --- [zenpay-backend] [           main] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 1 endpoint beneath base path '/actuator'
+2026-07-04T13:15:12.727-05:00 DEBUG 14472 --- [zenpay-backend] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with filters: DisableEncodeUrlFilter, WebAsyncManagerIntegrationFilter, SecurityContextHolderFilter, HeaderWriterFilter, CorsFilter, LogoutFilter, JwtAuthenticationFilter, RequestCacheAwareFilter, SecurityContextHolderAwareRequestFilter, AnonymousAuthenticationFilter, SessionManagementFilter, ExceptionTranslationFilter, AuthorizationFilter
+2026-07-04T13:15:27.289-05:00  INFO 14472 --- [zenpay-backend] [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path '/'
+2026-07-04T13:15:27.523-05:00  INFO 14472 --- [zenpay-backend] [           main] com.zenpay.ZenPayApplication             : Started ZenPayApplication in 253.112 seconds (process running for 269.091)
+2026-07-04T15:12:15.965-05:00  WARN 14472 --- [zenpay-backend] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=47s492ms620µs400ns).
+2026-07-04T15:13:04.806-05:00  WARN 14472 --- [zenpay-backend] [l-1 housekeeper] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=53s873ms707µs400ns).
+2026-07-04T16:34:00.244-05:00  INFO 14472 --- [zenpay-backend] [nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2026-07-04T16:34:00.633-05:00  INFO 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2026-07-04T16:34:09.534-05:00  INFO 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 8716 ms
+2026-07-04T16:34:26.495-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.html
+2026-07-04T16:34:36.466-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:34:39.999-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.html
+2026-07-04T16:35:16.267-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.css
+2026-07-04T16:35:16.277-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:35:16.277-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-bundle.js
+2026-07-04T16:35:16.587-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.css
+2026-07-04T16:35:16.592-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:35:16.599-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-bundle.js
+2026-07-04T16:35:18.275-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui.css
+2026-07-04T16:35:18.330-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:35:18.344-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui.css
+2026-07-04T16:35:19.351-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2026-07-04T16:35:19.356-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:35:19.367-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2026-07-04T16:35:26.528-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-initializer.js
+2026-07-04T16:35:26.533-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:35:26.539-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-initializer.js
+2026-07-04T16:42:03.326-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api-docs/swagger-config
+2026-07-04T16:42:03.442-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:42:03.536-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api-docs/swagger-config
+2026-07-04T16:42:06.564-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/favicon-32x32.png
+2026-07-04T16:42:06.585-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:42:06.593-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/favicon-32x32.png
+2026-07-04T16:42:59.907-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api-docs
+2026-07-04T16:42:59.912-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T16:42:59.915-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api-docs
+2026-07-04T16:43:29.584-05:00  INFO 14472 --- [zenpay-backend] [nio-8080-exec-4] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 29283 ms
+2026-07-04T18:11:44.420-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api-docs
+2026-07-04T18:11:44.942-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:11:45.082-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api-docs
+2026-07-04T18:12:43.465-05:00  INFO 14472 --- [zenpay-backend] [nio-8080-exec-1] o.springdoc.api.AbstractOpenApiResource  : Init duration for springdoc-openapi is: 55482 ms
+2026-07-04T18:12:44.815-05:00 ERROR 14472 --- [zenpay-backend] [nio-8080-exec-1] c.z.i.exception.GlobalExceptionHandler   : Unexpected error occurred
+
+org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to write: java.io.IOException: Connection reset by peer
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.handleIOException(StandardServletAsyncWebRequest.java:346) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:404) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at java.base/java.io.OutputStream.write(OutputStream.java:124) ~[na:na]
+	at org.springframework.util.StreamUtils.copy(StreamUtils.java:118) ~[spring-core-6.2.1.jar!/:6.2.1]
+	at org.springframework.http.converter.ByteArrayHttpMessageConverter.writeInternal(ByteArrayHttpMessageConverter.java:67) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.http.converter.ByteArrayHttpMessageConverter.writeInternal(ByteArrayHttpMessageConverter.java:38) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.http.converter.AbstractHttpMessageConverter.write(AbstractHttpMessageConverter.java:235) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:344) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestResponseBodyMethodProcessor.handleReturnValue(RequestResponseBodyMethodProcessor.java:208) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.FrameworkServlet.doGet(FrameworkServlet.java:903) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:564) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238) ~[spring-security-config-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:114) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: org.apache.catalina.connector.ClientAbortException: java.io.IOException: Connection reset by peer
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:346) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.appendByteArray(OutputBuffer.java:751) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.append(OutputBuffer.java:672) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.writeBytes(OutputBuffer.java:381) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.write(OutputBuffer.java:359) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.CoyoteOutputStream.write(CoyoteOutputStream.java:103) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.security.web.util.OnCommittedResponseWrapper$SaveContextServletOutputStream.write(OnCommittedResponseWrapper.java:639) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.write(StandardServletAsyncWebRequest.java:401) ~[spring-web-6.2.1.jar!/:6.2.1]
+	... 138 common frames omitted
+Caused by: java.io.IOException: Connection reset by peer
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:542) ~[na:na]
+	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:122) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1378) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:764) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketWrapperBase.writeBlocking(SocketWrapperBase.java:589) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketWrapperBase.write(SocketWrapperBase.java:533) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.doWrite(Http11OutputBuffer.java:548) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.filters.IdentityOutputFilter.doWrite(IdentityOutputFilter.java:73) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11OutputBuffer.doWrite(Http11OutputBuffer.java:193) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.Response.doWrite(Response.java:631) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.realWriteBytes(OutputBuffer.java:334) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	... 145 common frames omitted
+
+2026-07-04T18:12:58.900-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api-docs
+2026-07-04T18:12:59.182-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:12:59.509-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api-docs
+2026-07-04T18:13:01.115-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /auth/login
+2026-07-04T18:13:01.223-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:13:02.403-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T18:13:03.770-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing POST /error
+2026-07-04T18:13:03.832-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:13:03.859-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T18:13:17.526-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /auth/login
+2026-07-04T18:13:17.583-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:13:17.606-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T18:13:17.631-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing POST /error
+2026-07-04T18:13:17.649-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:13:17.659-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T18:13:56.049-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T18:13:56.075-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:13:56.094-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T18:14:22.558-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T18:14:42.154-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+2026-07-04T18:14:42.217-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T18:14:42.227-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+2026-07-04T18:14:46.664-05:00 ERROR 14472 --- [zenpay-backend] [io-8080-exec-10] c.z.i.exception.GlobalExceptionHandler   : Unexpected error occurred
+
+org.springframework.web.context.request.async.AsyncRequestNotUsableException: ServletOutputStream failed to flush: java.io.IOException: Connection reset by peer
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleHttpServletResponse.handleIOException(StandardServletAsyncWebRequest.java:346) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.flush(StandardServletAsyncWebRequest.java:418) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at java.base/java.io.FilterOutputStream.flush(FilterOutputStream.java:155) ~[na:na]
+	at com.fasterxml.jackson.core.json.UTF8JsonGenerator.flush(UTF8JsonGenerator.java:1205) ~[jackson-core-2.18.2.jar!/:2.18.2]
+	at com.fasterxml.jackson.databind.ObjectWriter.writeValue(ObjectWriter.java:1063) ~[jackson-databind-2.18.2.jar!/:2.18.2]
+	at org.springframework.http.converter.json.AbstractJackson2HttpMessageConverter.writeInternal(AbstractJackson2HttpMessageConverter.java:486) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.http.converter.AbstractGenericHttpMessageConverter.write(AbstractGenericHttpMessageConverter.java:126) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.AbstractMessageConverterMethodProcessor.writeWithMessageConverters(AbstractMessageConverterMethodProcessor.java:345) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.HttpEntityMethodProcessor.handleReturnValue(HttpEntityMethodProcessor.java:261) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.method.support.HandlerMethodReturnValueHandlerComposite.handleReturnValue(HandlerMethodReturnValueHandlerComposite.java:78) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.ServletInvocableHandlerMethod.invokeAndHandle(ServletInvocableHandlerMethod.java:136) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.invokeHandlerMethod(RequestMappingHandlerAdapter.java:986) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter.handleInternal(RequestMappingHandlerAdapter.java:891) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.mvc.method.AbstractHandlerMethodAdapter.handle(AbstractHandlerMethodAdapter.java:87) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:1088) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:978) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:1014) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:914) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:590) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.servlet.FrameworkServlet.service(FrameworkServlet.java:885) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:658) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:195) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:51) ~[tomcat-embed-websocket-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:108) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$FilterObservation$SimpleFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:479) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$1(ObservationFilterChainDecorator.java:340) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator.lambda$wrapSecured$0(ObservationFilterChainDecorator.java:82) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:128) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.access.intercept.AuthorizationFilter.doFilter(AuthorizationFilter.java:101) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:101) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:227) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.wrapFilter(ObservationFilterChainDecorator.java:240) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$AroundFilterObservation$SimpleAroundFilterObservation.lambda$wrap$0(ObservationFilterChainDecorator.java:323) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$ObservationFilter.doFilter(ObservationFilterChainDecorator.java:224) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.ObservationFilterChainDecorator$VirtualFilterChain.doFilter(ObservationFilterChainDecorator.java:137) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.servlet.handler.HandlerMappingIntrospector.lambda$createCacheFilter$3(HandlerMappingIntrospector.java:243) ~[spring-webmvc-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.CompositeFilter$VirtualFilterChain.doFilter(CompositeFilter.java:113) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.CompositeFilter.doFilter(CompositeFilter.java:74) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.security.config.annotation.web.configuration.WebMvcSecurityConfiguration$CompositeFilterChainProxy.doFilter(WebMvcSecurityConfiguration.java:238) ~[spring-security-config-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:362) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:278) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.ServerHttpObservationFilter.doFilterInternal(ServerHttpObservationFilter.java:114) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116) ~[spring-web-6.2.1.jar!/:6.2.1]
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:164) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:140) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:167) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:483) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:344) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:397) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:905) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1190) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:63) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: org.apache.catalina.connector.ClientAbortException: java.io.IOException: Connection reset by peer
+	at org.apache.catalina.connector.OutputBuffer.doFlush(OutputBuffer.java:308) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.flush(OutputBuffer.java:270) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.CoyoteOutputStream.flush(CoyoteOutputStream.java:136) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.springframework.security.web.util.OnCommittedResponseWrapper$SaveContextServletOutputStream.flush(OnCommittedResponseWrapper.java:524) ~[spring-security-web-6.4.2.jar!/:6.4.2]
+	at org.springframework.web.context.request.async.StandardServletAsyncWebRequest$LifecycleServletOutputStream.flush(StandardServletAsyncWebRequest.java:415) ~[spring-web-6.2.1.jar!/:6.2.1]
+	... 138 common frames omitted
+Caused by: java.io.IOException: Connection reset by peer
+	at java.base/sun.nio.ch.SocketDispatcher.write0(Native Method) ~[na:na]
+	at java.base/sun.nio.ch.SocketDispatcher.write(SocketDispatcher.java:54) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.writeFromNativeBuffer(IOUtil.java:137) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:102) ~[na:na]
+	at java.base/sun.nio.ch.IOUtil.write(IOUtil.java:58) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.write(SocketChannelImpl.java:542) ~[na:na]
+	at org.apache.tomcat.util.net.NioChannel.write(NioChannel.java:122) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.NioEndpoint$NioSocketWrapper.doWrite(NioEndpoint.java:1378) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketWrapperBase.doWrite(SocketWrapperBase.java:764) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketWrapperBase.flushBlocking(SocketWrapperBase.java:728) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.tomcat.util.net.SocketWrapperBase.flush(SocketWrapperBase.java:712) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11OutputBuffer$SocketOutputBuffer.flush(Http11OutputBuffer.java:574) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.filters.ChunkedOutputFilter.flush(ChunkedOutputFilter.java:156) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11OutputBuffer.flush(Http11OutputBuffer.java:216) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.http11.Http11Processor.flush(Http11Processor.java:1274) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.AbstractProcessor.action(AbstractProcessor.java:408) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.coyote.Response.action(Response.java:208) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	at org.apache.catalina.connector.OutputBuffer.doFlush(OutputBuffer.java:304) ~[tomcat-embed-core-10.1.34.jar!/:na]
+	... 142 common frames omitted
+
+2026-07-04T19:36:28.916-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.html
+2026-07-04T19:36:29.300-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:36:29.457-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.html
+2026-07-04T19:36:35.500-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-standalone-preset.js
+2026-07-04T19:36:35.502-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-initializer.js
+2026-07-04T19:36:35.696-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui-bundle.js
+2026-07-04T19:36:35.701-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:36:35.700-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:36:35.707-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/index.css
+2026-07-04T19:36:35.734-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /swagger-ui/swagger-ui.css
+2026-07-04T19:36:35.745-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:36:35.752-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-initializer.js
+2026-07-04T19:36:35.745-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:36:35.746-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:36:35.785-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/index.css
+2026-07-04T19:36:35.789-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui.css
+2026-07-04T19:36:35.861-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-bundle.js
+2026-07-04T19:36:36.572-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /swagger-ui/swagger-ui-standalone-preset.js
+2026-07-04T19:37:01.475-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/auth/login
+2026-07-04T19:37:01.671-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T19:37:01.749-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:37:01.752-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T19:37:02.093-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T19:37:08.291-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T19:37:08.502-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T19:37:24.054-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T19:37:38.062-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T19:37:38.692-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T19:37:39.089-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T19:37:42.790-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T19:37:44.193-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T19:37:44.563-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T19:40:10.315-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api-docs/swagger-config
+2026-07-04T19:40:10.576-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:40:10.591-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api-docs/swagger-config
+2026-07-04T19:40:36.841-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api-docs
+2026-07-04T19:40:36.846-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:40:36.852-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api-docs
+2026-07-04T19:48:03.232-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /actuator/health
+2026-07-04T19:48:03.291-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:48:03.306-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /actuator/health
+2026-07-04T19:48:09.513-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T19:48:09.517-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:48:09.519-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T19:48:10.139-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T19:48:11.284-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T19:48:11.287-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:48:11.320-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T19:48:11.451-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-04T19:48:11.468-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:48:11.488-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T19:48:19.602-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T19:48:19.612-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:48:19.616-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T19:48:19.875-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T19:48:29.290-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T19:48:29.300-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T19:48:29.303-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T19:48:29.514-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T19:48:29.776-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T19:48:29.884-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers
+2026-07-04T20:03:40.275-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T20:03:40.904-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T20:03:41.737-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T20:03:46.584-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T20:03:46.754-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T20:03:46.817-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T20:03:49.612-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T20:03:49.738-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T20:03:49.765-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T20:03:50.155-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T20:03:50.155-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T20:03:50.155-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:03:50.190-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T20:03:50.202-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:03:50.214-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T20:03:50.224-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T20:03:50.294-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:03:50.436-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T20:03:53.336-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T20:03:53.351-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T20:03:53.482-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T20:03:56.643-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T20:03:56.691-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T20:03:56.733-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T20:03:56.781-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:03:56.800-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:03:56.822-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:04:01.056-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers
+2026-07-04T20:04:01.056-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers/beneficiaries
+2026-07-04T20:04:01.165-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T20:04:01.173-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers/beneficiaries
+2026-07-04T20:04:01.220-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T20:04:01.282-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T20:04:01.304-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers/beneficiaries
+2026-07-04T20:04:01.484-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers
+2026-07-04T20:04:26.213-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T20:04:26.284-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T20:04:26.328-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T20:04:27.899-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T20:04:27.915-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T20:04:48.919-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/recharges
+2026-07-04T20:04:48.957-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/recharges
+2026-07-04T20:04:49.602-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/recharges
+2026-07-04T20:04:52.733-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/payments
+2026-07-04T20:04:52.764-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/payments
+2026-07-04T20:04:52.782-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/payments
+2026-07-04T20:04:54.082-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/savings-goals
+2026-07-04T20:04:54.140-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/savings-goals
+2026-07-04T20:04:54.174-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/savings-goals
+2026-07-04T20:04:55.363-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/loans
+2026-07-04T20:04:55.372-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/loans
+2026-07-04T20:04:55.405-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/loans
+2026-07-04T20:04:56.399-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/investments
+2026-07-04T20:04:56.430-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/investments
+2026-07-04T20:04:56.453-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/investments
+2026-07-04T20:04:57.635-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cash-withdrawals
+2026-07-04T20:04:57.653-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cash-withdrawals
+2026-07-04T20:04:57.674-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cash-withdrawals
+2026-07-04T20:05:02.108-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/tickets
+2026-07-04T20:05:02.116-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/tickets
+2026-07-04T20:05:02.141-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/tickets
+2026-07-04T20:05:03.728-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/atms/favorites
+2026-07-04T20:05:03.764-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/atms/favorites
+2026-07-04T20:05:03.778-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/atms/favorites
+2026-07-04T20:05:04.116-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/atms/nearest?lat=10.992380762810134&lng=-74.78558057767127
+2026-07-04T20:05:04.134-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/atms/nearest?lat=10.992380762810134&lng=-74.78558057767127
+2026-07-04T20:05:04.147-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/atms/nearest?lat=10.992380762810134&lng=-74.78558057767127
+2026-07-04T20:05:06.143-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/tickets
+2026-07-04T20:05:06.164-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/tickets
+2026-07-04T20:05:08.130-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T20:05:08.155-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T20:05:08.169-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T20:05:09.138-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T20:05:09.181-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T20:05:09.204-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T20:05:12.047-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/security/overview
+2026-07-04T20:05:12.050-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/security/sessions
+2026-07-04T20:05:12.051-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/security/alerts
+2026-07-04T20:05:12.050-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/devices
+2026-07-04T20:05:12.063-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/security/overview
+2026-07-04T20:05:12.066-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/security/alerts
+2026-07-04T20:05:12.082-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/security/overview
+2026-07-04T20:05:12.104-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/security/sessions
+2026-07-04T20:05:12.109-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/security/alerts
+2026-07-04T20:05:12.112-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/devices
+2026-07-04T20:05:12.129-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/security/sessions
+2026-07-04T20:05:12.145-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/devices
+2026-07-04T20:08:31.392-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers/beneficiaries
+2026-07-04T20:08:31.393-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers
+2026-07-04T20:08:31.395-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T20:08:31.402-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T20:08:31.428-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers
+2026-07-04T20:08:31.454-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers/beneficiaries
+2026-07-04T20:08:31.469-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T20:08:31.487-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers/beneficiaries
+2026-07-04T20:08:31.502-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T20:08:41.049-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T20:08:41.104-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T20:08:41.214-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T20:08:44.970-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T20:08:45.026-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T20:08:45.067-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T20:08:45.131-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:08:45.133-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T20:08:45.137-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T20:08:45.178-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:08:45.187-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T20:08:45.189-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T20:08:45.203-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T20:08:45.223-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T20:08:45.235-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T20:21:50.073-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/auth/login
+2026-07-04T20:21:50.257-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:21:50.349-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T20:21:50.480-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /error
+2026-07-04T20:21:50.484-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:21:50.486-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T20:21:56.777-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/accounts
+2026-07-04T20:21:56.781-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:21:56.785-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T20:21:56.918-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-04T20:21:56.927-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:21:56.929-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T20:22:01.434-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /
+2026-07-04T20:22:01.436-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:22:01.445-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T20:22:01.457-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /error
+2026-07-04T20:22:01.459-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:22:01.460-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.s.w.a.Http403ForbiddenEntryPoint     : Pre-authenticated entry point called. Rejecting access
+2026-07-04T20:23:17.373-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T20:23:17.377-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T20:23:17.388-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T20:23:18.099-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T21:45:14.553-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/auth/login
+2026-07-04T21:45:14.762-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T21:45:14.783-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T21:45:14.787-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T21:45:15.314-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.s.a.dao.DaoAuthenticationProvider    : Failed to find user 'vanessa@zanpay.com'
+2026-07-04T21:45:54.482-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/auth/login
+2026-07-04T21:45:54.517-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T21:45:54.519-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T21:45:54.532-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T21:45:54.746-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T21:45:55.014-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T21:45:55.034-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T21:45:55.081-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T21:45:55.182-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T21:45:55.186-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T21:45:55.211-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T21:45:55.214-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T21:45:55.231-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T21:45:55.232-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T21:46:06.972-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T21:46:06.987-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T21:46:07.001-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:04:31.395-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/auth/login
+2026-07-04T22:04:31.598-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T22:04:31.629-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T22:04:31.636-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T22:04:32.057-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T22:04:32.222-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:04:32.248-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:04:32.270-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T22:04:32.332-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:04:32.342-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T22:04:32.351-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:04:32.361-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T22:04:32.365-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:04:32.408-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T22:04:35.434-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:04:35.463-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:04:35.482-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:04:35.527-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:04:35.532-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:04:35.536-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:04:35.540-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:04:35.550-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:04:35.629-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:04:35.553-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:04:35.672-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:04:35.679-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:04:37.566-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:04:37.588-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:04:37.602-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:04:39.558-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T22:04:39.584-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T22:04:39.601-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T22:04:46.955-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:04:46.978-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:04:46.991-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:04:47.034-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:04:47.039-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:04:47.039-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:04:47.054-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:04:47.054-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:04:47.066-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:04:47.069-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:04:47.071-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:04:47.087-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:04:51.342-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:04:51.367-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:04:51.388-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:05:07.601-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:05:07.617-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:05:07.617-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:05:07.620-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:05:07.639-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T22:05:07.653-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:05:07.653-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:05:07.671-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:05:07.699-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:05:09.501-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T22:05:09.518-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T22:05:09.525-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T22:05:25.118-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:05:25.132-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:05:25.144-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:05:25.168-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:05:25.168-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:05:25.169-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:05:25.182-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:05:25.184-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:05:25.184-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:05:25.202-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:05:25.210-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:05:25.214-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:05:27.864-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:05:27.878-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:05:27.885-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:05:33.114-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:05:33.131-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:05:33.139-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:05:33.176-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:05:33.188-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:05:33.195-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:05:39.437-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:05:39.437-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers/beneficiaries
+2026-07-04T22:05:39.437-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers
+2026-07-04T22:05:39.458-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:05:39.460-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T22:05:39.462-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers/beneficiaries
+2026-07-04T22:05:39.467-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers
+2026-07-04T22:05:39.467-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:05:39.484-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers/beneficiaries
+2026-07-04T22:05:53.776-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:05:53.793-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:05:53.803-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:05:56.265-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:05:56.281-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:06:22.711-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:06:22.719-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:06:22.729-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:06:22.731-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:06:22.734-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:06:22.747-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T22:06:22.767-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:06:22.771-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:06:22.796-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:06:58.838-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:06:58.850-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:06:58.850-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:06:58.860-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:06:58.863-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:06:58.865-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:06:58.879-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:06:58.882-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T22:06:58.894-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:07:05.849-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:07:05.869-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:07:05.877-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:07:10.433-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/recharges
+2026-07-04T22:07:10.448-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/recharges
+2026-07-04T22:07:10.461-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/recharges
+2026-07-04T22:07:15.827-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/payments
+2026-07-04T22:07:15.845-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/payments
+2026-07-04T22:07:15.857-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/payments
+2026-07-04T22:07:20.348-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/savings-goals
+2026-07-04T22:07:20.366-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/savings-goals
+2026-07-04T22:07:20.379-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/savings-goals
+2026-07-04T22:07:24.231-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/loans
+2026-07-04T22:07:24.250-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/loans
+2026-07-04T22:07:24.263-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/loans
+2026-07-04T22:07:27.982-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/investments
+2026-07-04T22:07:27.999-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/investments
+2026-07-04T22:07:28.015-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/investments
+2026-07-04T22:07:32.831-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cash-withdrawals
+2026-07-04T22:07:32.847-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cash-withdrawals
+2026-07-04T22:07:32.861-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cash-withdrawals
+2026-07-04T22:07:35.946-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:07:35.960-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:07:35.968-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:10:29.517-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:10:29.530-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:10:29.569-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T22:10:29.711-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:10:29.725-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:10:29.803-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:10:29.803-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:10:29.833-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:10:29.838-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:10:29.920-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:10:29.929-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:10:29.933-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:10:29.936-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:10:29.968-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:10:29.986-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:10:29.988-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:10:30.008-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:10:30.006-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:12:04.139-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:12:04.268-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:12:04.575-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:14:55.735-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/auth/login
+2026-07-04T22:14:55.757-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing POST /api/v1/auth/login
+2026-07-04T22:14:55.764-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2026-07-04T22:14:55.767-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured POST /api/v1/auth/login
+2026-07-04T22:14:55.951-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.s.a.dao.DaoAuthenticationProvider    : Authenticated user
+2026-07-04T22:14:56.087-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:14:56.101-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:14:56.127-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me
+2026-07-04T22:14:56.183-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:14:56.191-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T22:14:56.198-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:14:56.203-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T22:14:56.204-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:14:56.225-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T22:14:59.997-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:15:00.029-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:15:00.038-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:15:00.101-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:15:00.101-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:15:00.113-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:15:00.123-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:15:00.132-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:15:00.134-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:15:00.134-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:15:00.152-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:15:00.185-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:15:04.450-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:15:04.462-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:15:04.535-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:15:10.423-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards/2170bba0-707a-44be-b690-ca68175a9ebf/limit
+2026-07-04T22:15:10.451-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing PATCH /api/v1/cards/2170bba0-707a-44be-b690-ca68175a9ebf/limit
+2026-07-04T22:15:10.460-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured PATCH /api/v1/cards/2170bba0-707a-44be-b690-ca68175a9ebf/limit
+2026-07-04T22:15:10.802-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:15:10.820-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:15:10.828-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:15:16.647-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:15:16.668-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:15:16.685-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:15:16.717-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:15:16.733-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:15:16.749-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:15:21.252-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:15:21.264-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:15:21.267-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers
+2026-07-04T22:15:21.268-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers/beneficiaries
+2026-07-04T22:15:21.282-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers/beneficiaries
+2026-07-04T22:15:21.288-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T22:15:21.289-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers/beneficiaries
+2026-07-04T22:15:21.302-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers
+2026-07-04T22:15:30.851-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:15:30.876-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:15:30.886-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:15:40.618-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:15:40.655-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:15:40.662-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:15:44.236-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/recharges
+2026-07-04T22:15:44.252-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/recharges
+2026-07-04T22:15:44.265-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/recharges
+2026-07-04T22:15:47.700-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/payments
+2026-07-04T22:15:47.715-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/payments
+2026-07-04T22:15:47.724-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/payments
+2026-07-04T22:15:58.700-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/savings-goals
+2026-07-04T22:15:58.719-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/savings-goals
+2026-07-04T22:15:58.735-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/savings-goals
+2026-07-04T22:16:02.062-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/loans
+2026-07-04T22:16:02.091-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/loans
+2026-07-04T22:16:02.100-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/loans
+2026-07-04T22:16:05.350-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/investments
+2026-07-04T22:16:05.367-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/investments
+2026-07-04T22:16:05.381-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/investments
+2026-07-04T22:16:09.996-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cash-withdrawals
+2026-07-04T22:16:10.021-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cash-withdrawals
+2026-07-04T22:16:10.037-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cash-withdrawals
+2026-07-04T22:16:13.167-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:16:13.191-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:16:13.198-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:16:21.564-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications/4fe672e3-a269-412b-add5-c7f6af566b66/read
+2026-07-04T22:16:21.580-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing PUT /api/v1/notifications/4fe672e3-a269-412b-add5-c7f6af566b66/read
+2026-07-04T22:16:21.590-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured PUT /api/v1/notifications/4fe672e3-a269-412b-add5-c7f6af566b66/read
+2026-07-04T22:16:23.884-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T22:16:23.902-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T22:16:23.928-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T22:16:37.429-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:16:37.448-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:16:37.461-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:18:58.194-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/dashboard
+2026-07-04T22:18:58.358-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/dashboard
+2026-07-04T22:18:58.391-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/dashboard
+2026-07-04T22:19:00.892-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:19:00.963-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:19:00.978-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:19:05.701-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:19:05.723-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:19:05.731-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:19:05.748-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:19:05.856-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:19:05.858-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:19:05.862-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:19:05.882-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:19:05.893-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/a34cbb39-8b2e-4ed0-be86-8768c702e493/movements
+2026-07-04T22:19:05.968-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:19:05.973-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:19:05.977-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/8a0f22c3-6be3-4b5c-95b9-00e55738c757/movements
+2026-07-04T22:19:06.968-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cards
+2026-07-04T22:19:07.003-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cards
+2026-07-04T22:19:07.022-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cards
+2026-07-04T22:19:08.440-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:19:08.440-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:19:08.459-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts/96982ae4-1a27-46e2-bd17-12877972087e/movements
+2026-07-04T22:19:08.488-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:19:17.403-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/accounts
+2026-07-04T22:19:17.403-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers/beneficiaries
+2026-07-04T22:19:17.416-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/transfers
+2026-07-04T22:19:17.459-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/accounts
+2026-07-04T22:19:17.499-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/accounts
+2026-07-04T22:19:17.540-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers
+2026-07-04T22:19:17.555-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/transfers/beneficiaries
+2026-07-04T22:19:17.587-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers
+2026-07-04T22:19:17.589-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/transfers/beneficiaries
+2026-07-04T22:19:24.724-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/qr/history
+2026-07-04T22:19:24.814-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/qr/history
+2026-07-04T22:19:24.850-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/qr/history
+2026-07-04T22:19:28.270-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/recharges
+2026-07-04T22:19:28.289-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/recharges
+2026-07-04T22:19:28.301-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/recharges
+2026-07-04T22:19:30.289-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/payments
+2026-07-04T22:19:30.321-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/payments
+2026-07-04T22:19:30.336-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/payments
+2026-07-04T22:19:33.450-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/savings-goals
+2026-07-04T22:19:33.528-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/savings-goals
+2026-07-04T22:19:33.542-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/savings-goals
+2026-07-04T22:19:35.199-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/loans
+2026-07-04T22:19:35.355-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/loans
+2026-07-04T22:19:35.369-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/loans
+2026-07-04T22:19:36.835-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/investments
+2026-07-04T22:19:36.861-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/investments
+2026-07-04T22:19:36.882-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/investments
+2026-07-04T22:19:39.415-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/cash-withdrawals
+2026-07-04T22:19:39.591-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/cash-withdrawals
+2026-07-04T22:19:39.604-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/cash-withdrawals
+2026-07-04T22:19:43.831-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/atms/favorites
+2026-07-04T22:19:43.917-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/atms/favorites
+2026-07-04T22:19:43.956-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/atms/favorites
+2026-07-04T22:19:44.298-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/atms/nearest?lat=10.992436732521718&lng=-74.7855704536681
+2026-07-04T22:19:44.316-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/atms/nearest?lat=10.992436732521718&lng=-74.7855704536681
+2026-07-04T22:19:44.334-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/atms/nearest?lat=10.992436732521718&lng=-74.7855704536681
+2026-07-04T22:20:14.339-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-9] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/tickets
+2026-07-04T22:20:14.599-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/tickets
+2026-07-04T22:20:14.781-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/tickets
+2026-07-04T22:20:17.232-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/notifications
+2026-07-04T22:20:17.887-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/notifications
+2026-07-04T22:20:17.914-05:00 DEBUG 14472 --- [zenpay-backend] [io-8080-exec-10] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/notifications
+2026-07-04T22:20:18.283-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-6] o.s.security.web.FilterChainProxy        : Securing OPTIONS /api/v1/users/me
+2026-07-04T22:20:18.530-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/v1/users/me
+2026-07-04T22:20:18.553-05:00 DEBUG 14472 --- [zenpay-backend] [nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured GET /api/v1/users/me

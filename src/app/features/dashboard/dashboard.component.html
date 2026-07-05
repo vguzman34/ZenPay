@@ -1,0 +1,170 @@
+@if (loading()) {
+  <div class="dashboard">
+    <div class="loading-skeleton">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-cards">
+        @for (_ of [1,2,3,4]; track _) {
+          <div class="skeleton-card glass-card"></div>
+        }
+      </div>
+      <div class="skeleton-grid">
+        <div class="skeleton-main glass-card"></div>
+        <div class="skeleton-side glass-card"></div>
+      </div>
+    </div>
+  </div>
+} @else if (error(); as errMsg) {
+  <div class="dashboard">
+    <div class="error-state glass-card">
+      <span class="material-symbols-rounded" style="font-size: 48px; color: var(--color-danger)">error</span>
+      <h2>Algo salió mal</h2>
+      <p>{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadDashboard()">Reintentar</button>
+    </div>
+  </div>
+} @else {
+  <div class="dashboard animate-fade-in">
+    <header class="dashboard-header">
+      <div class="header-greeting">
+        <h1 class="greeting-title">Bienvenida, {{ userName() }}</h1>
+        <p class="greeting-date">{{ dateFormatted }}</p>
+      </div>
+      <div class="header-balance glass-card">
+        <span class="balance-label">Balance Total</span>
+        <span class="balance-amount">{{ totalBalance() }}</span>
+        <span class="balance-currency">{{ totalBalanceLabel }}</span>
+      </div>
+    </header>
+
+    <section class="balance-cards">
+      @for (card of balanceCards(); track card.label) {
+        <div class="balance-card glass-card" style="--card-accent: {{ card.accent }}">
+          <div class="card-icon-wrapper">
+            <span class="material-symbols-rounded card-icon">{{ card.icon }}</span>
+          </div>
+          <div class="card-info">
+            <span class="card-label">{{ card.label }}</span>
+            <span class="card-amount">{{ card.amount }}</span>
+            <span class="card-trend" [class.trend-up]="card.trendUp" [class.trend-down]="!card.trendUp">
+              {{ card.trendUp ? '▲' : '▼' }} {{ card.trend }}
+            </span>
+          </div>
+        </div>
+      }
+    </section>
+
+    <section class="dashboard-grid">
+      <div class="grid-left">
+        <div class="section-header">
+          <h2 class="section-title">Actividad Reciente</h2>
+          <a class="section-link" routerLink="/movements">Ver todos →</a>
+        </div>
+        @if (transactions().length === 0) {
+          <div class="transactions-list glass-card">
+            <div class="empty-state-mini">
+              <span class="material-symbols-rounded" style="font-size: 32px; color: var(--color-text-muted)">receipt_long</span>
+              <p>No hay movimientos recientes</p>
+            </div>
+          </div>
+        } @else {
+          <div class="transactions-list glass-card">
+            @for (tx of transactions(); track tx.description + tx.date; let i = $index) {
+              <div class="transaction-item" style="animation-delay: {{ i * 0.05 }}s">
+                <div class="tx-icon-wrapper">
+                  <span class="material-symbols-rounded tx-icon">{{ tx.icon }}</span>
+                </div>
+                <div class="tx-info">
+                  <span class="tx-description">{{ tx.description }}</span>
+                  <span class="tx-category">{{ tx.category }} · {{ tx.date }}</span>
+                </div>
+                <div class="tx-right">
+                  <span class="tx-amount" [class.income]="tx.isIncome" [class.expense]="!tx.isIncome">{{ tx.amount }}</span>
+                  <span class="tx-status"
+                    [class.status-completed]="tx.status === 'COMPLETED'"
+                    [class.status-pending]="tx.status === 'PENDING'">
+                    {{ tx.status === 'COMPLETED' ? '✓ Completado' : '○ Pendiente' }}
+                  </span>
+                </div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="grid-right">
+        <div class="score-card glass-card">
+          <div class="score-header">
+            <h3 class="score-title">Score Financiero</h3>
+          </div>
+          <div class="score-circle-wrapper">
+            <div class="score-circle" [style.background]="scoreGradient">
+              <div class="score-circle-inner">
+                <span class="score-value">{{ financialScore() }}</span>
+                <span class="score-max">/100</span>
+              </div>
+            </div>
+          </div>
+          <p class="score-label">Salud financiera general</p>
+        </div>
+
+        <div class="quick-actions">
+          @for (action of quickActions; track action.label) {
+            <a class="quick-action-btn glass-card" [routerLink]="action.route">
+              <span class="material-symbols-rounded qa-icon">{{ action.icon }}</span>
+              <span class="qa-label">{{ action.label }}</span>
+            </a>
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="charts-section">
+      <div class="chart-card glass-card">
+        <h3 class="chart-title">Flujo de Caja Mensual</h3>
+        <div class="chart-placeholder">
+          <div class="chart-bars">
+            @for (bar of monthlyCashFlow(); track $index) {
+              <div class="chart-bar" [class.is-income]="bar >= 0" [class.is-expense]="bar < 0"
+                   [style.height.%]="bar < 0 ? -bar : bar">
+                <span class="chart-bar-value">{{ formatChartValue(bar) }}</span>
+              </div>
+            }
+          </div>
+          <div class="chart-labels">
+            @for (m of monthLabels; track m) {
+              <span class="chart-label">{{ m }}</span>
+            }
+          </div>
+        </div>
+      </div>
+
+      <div class="chart-card glass-card">
+        <h3 class="chart-title">Ingresos vs Gastos</h3>
+        <div class="comparison-chart">
+          <div class="comparison-item">
+            <div class="comparison-header">
+              <span class="comparison-label">Ingresos</span>
+              <span class="comparison-value income">{{ monthlyIncome() }}</span>
+            </div>
+            <div class="comparison-bar-track">
+              <div class="comparison-bar income-bar" [style.width]="incomeBarWidth()"></div>
+            </div>
+          </div>
+          <div class="comparison-item">
+            <div class="comparison-header">
+              <span class="comparison-label">Gastos</span>
+              <span class="comparison-value expense">{{ monthlyExpenses() }}</span>
+            </div>
+            <div class="comparison-bar-track">
+              <div class="comparison-bar expense-bar" [style.width]="expenseBarWidth()"></div>
+            </div>
+          </div>
+          <div class="comparison-footer">
+            <span class="cf-label">Cash Flow</span>
+            <span class="cf-value">+{{ cashFlow() }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+}

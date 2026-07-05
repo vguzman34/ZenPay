@@ -1,0 +1,48 @@
+<header class="navbar glass">
+  <div class="navbar-left">
+    <button class="hamburger" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="search-box">
+      <span class="material-symbols-rounded search-icon">search</span>
+      <input type="text" class="search-input" placeholder="Buscar movimientos, facturas..." />
+    </div>
+  </div>
+
+  <div class="navbar-right">
+    <button class="theme-toggle" (click)="toggleDarkMode()" [attr.aria-label]="themeStore.isDarkMode() ? 'Modo claro' : 'Modo oscuro'">
+      @if (themeStore.isDarkMode()) {
+        <span class="material-symbols-rounded">light_mode</span>
+      } @else {
+        <span class="material-symbols-rounded">dark_mode</span>
+      }
+    </button>
+
+    <button class="notification-btn" (click)="closeUserMenu()" routerLink="/notifications" aria-label="Notificaciones">
+      <span class="material-symbols-rounded notif-icon">notifications</span>
+      @if (notificationStore.unreadCount() > 0) {
+        <span class="notif-badge">{{ notificationStore.unreadCount() }}</span>
+      }
+    </button>
+
+    <div class="user-menu" (click)="toggleUserMenu()" (mouseleave)="closeUserMenu()">
+      <div class="user-avatar">
+        <span>{{ getUserInitials() }}</span>
+      </div>
+      <span class="user-name">{{ authStore.user()?.fullName ?? 'Usuario' }}</span>
+      <span class="dropdown-arrow">▾</span>
+
+      @if (showUserMenu()) {
+        <div class="dropdown-menu animate-scale-in">
+          <a class="dropdown-item" routerLink="/profile" (click)="closeUserMenu()"><span class="material-symbols-rounded">person</span> Perfil</a>
+          <a class="dropdown-item" routerLink="/security" (click)="closeUserMenu()"><span class="material-symbols-rounded">shield</span> Seguridad</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/support" (click)="closeUserMenu()"><span class="material-symbols-rounded">support</span> Soporte</a>
+          <a class="dropdown-item logout" (click)="authStore.logout(); closeUserMenu()"><span class="material-symbols-rounded">logout</span> Cerrar sesión</a>
+        </div>
+      }
+    </div>
+  </div>
+</header>

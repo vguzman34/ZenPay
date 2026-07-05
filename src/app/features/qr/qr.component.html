@@ -1,0 +1,99 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">Pagos QR</h1>
+    <p class="page-subtitle">Genera o escanea códigos QR para pagar</p>
+  </header>
+
+  <div class="tabs">
+    @for (tab of tabs; track tab; let i = $index) {
+      <button class="tab" [class.active]="selectedTab() === i" (click)="selectTab(i)">
+        {{ tab }}
+      </button>
+    }
+    <div class="tab-indicator" [style.transform]="'translateX(' + selectedTab() * 100 + '%)'" [style.width]="'calc(100% / ' + tabs.length + ')'"></div>
+  </div>
+
+  @if (selectedTab() === 0) {
+    <div class="glass-card form-card">
+      <h2 class="section-title">Generar QR de Pago</h2>
+
+      <div class="form-group">
+        <label class="form-label">Monto</label>
+        <input class="form-input" type="number" [ngModel]="qrAmount()" (ngModelChange)="qrAmount.set($event)" placeholder="$0" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Concepto</label>
+        <input class="form-input" [(ngModel)]="qrConcept" placeholder="Ej: Pago almuerzo" />
+      </div>
+
+      <button class="btn btn-primary btn-block" (click)="generateQr()">Generar QR</button>
+
+      @if (generatedQr()) {
+        <div class="qr-result">
+          <div class="qr-placeholder">
+            <div class="qr-grid">
+              @for (row of [0,1,2,3,4,5,6,7,8,9]; track row) {
+                <div class="qr-row">
+                  @for (col of [0,1,2,3,4,5,6,7,8,9]; track col) {
+                    <div class="qr-cell" [class.filled]="(row * 3 + col * 7 + row * col) % 3 !== 0"></div>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+          <div class="qr-info">
+            <p><strong>{{ formatCurrency(generatedQr()!.amount) }}</strong></p>
+            <p>{{ generatedQr()!.concept }}</p>
+          </div>
+          <button class="btn btn-secondary btn-block" (click)="clearQr()">Generar otro</button>
+        </div>
+      }
+    </div>
+  }
+
+  @if (selectedTab() === 1) {
+    <div class="glass-card scanner-card">
+      <div class="scanner-placeholder">
+        <div class="scanner-frame">
+          <div class="scanner-icon"><span class="material-symbols-rounded" style="font-size:64px">qr_code_scanner</span></div>
+          <p class="scanner-text">Apunta la cámara a un código QR</p>
+          <div class="scanner-line"></div>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (selectedTab() === 2) {
+    @if (loading()) {
+      <div class="glass-card">
+        <div class="skeleton" style="height:32px;width:40%;margin-bottom:16px"></div>
+        <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+        <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+        <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+      </div>
+    } @else if (error()) {
+      <div class="glass-card" style="text-align:center;padding:40px">
+        <span class="material-symbols-rounded" style="font-size:48px;color:var(--color-danger)">error</span>
+        <p style="margin:16px 0;color:var(--color-text-secondary)">{{ error() }}</p>
+        <button class="btn btn-primary" (click)="loadHistory()">Reintentar</button>
+      </div>
+    } @else {
+      <div class="glass-card">
+        <h2 class="section-title">Historial de QR</h2>
+        @for (qr of qrHistory(); track qr.id) {
+          <div class="qr-history-item">
+            <div class="qr-history-info">
+              <span class="qr-history-concept">{{ qr.concept }}</span>
+            </div>
+            <span class="qr-history-amount">{{ formatCurrency(qr.amount) }}</span>
+            <span class="status-badge {{ qr.status.toLowerCase() }}">{{ statusIcon(qr.status) }} {{ qr.status }}</span>
+          </div>
+        }
+        @empty {
+          <p class="empty-text">No hay códigos QR generados</p>
+        }
+      </div>
+    }
+  }
+</div>

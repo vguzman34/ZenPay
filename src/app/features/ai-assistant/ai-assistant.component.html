@@ -1,0 +1,73 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">🤖 ZenIA</h1>
+    <p class="page-subtitle">Tu asistente financiero inteligente</p>
+  </header>
+
+  <div class="chat-container glass-card">
+    <div class="chat-header">
+      <div class="chat-avatar">
+        <span class="chat-avatar-icon">🤖</span>
+      </div>
+      <div class="chat-avatar-info">
+        <span class="chat-avatar-name">ZenIA</span>
+        <span class="chat-avatar-status">● En línea</span>
+      </div>
+    </div>
+
+    <div class="chat-messages" #messageContainer>
+      @for (msg of messages(); track msg.timestamp) {
+        <div class="message-row" [class.user]="msg.isUser" [class.ai]="!msg.isUser">
+          @if (!msg.isUser) {
+            <div class="message-avatar">🤖</div>
+          }
+          <div class="message-bubble" [class.user-bubble]="msg.isUser" [class.ai-bubble]="!msg.isUser">
+            <span class="message-text">{{ msg.text }}</span>
+            <span class="message-time">{{ msg.timestamp.toLocaleTimeString('es-CO', { hour: '2-digit', minute: '2-digit' }) }}</span>
+          </div>
+        </div>
+      }
+
+      @if (isTyping()) {
+        <div class="message-row ai">
+          <div class="message-avatar">🤖</div>
+          <div class="message-bubble ai-bubble typing-bubble">
+            <div class="typing-dots">
+              <span class="dot"></span>
+              <span class="dot"></span>
+              <span class="dot"></span>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    @if (messages().length <= 1) {
+      <div class="suggestions-section">
+        <p class="suggestions-label">Sugerencias:</p>
+        <div class="suggestions-chips">
+          @for (s of suggestions; track s) {
+            <button class="suggestion-chip" (click)="selectSuggestion(s)">
+              {{ s }}
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+    <div class="chat-input-bar">
+      <input
+        type="text"
+        class="chat-input"
+        placeholder="Escribe tu mensaje..."
+        [ngModel]="inputText()"
+        (ngModelChange)="inputText.set($event)"
+        (keydown.enter)="sendMessage()"
+        [disabled]="isTyping()"
+      />
+      <button class="btn-send" (click)="sendMessage()" [disabled]="!inputText().trim() || isTyping()">
+        <span>➤</span>
+      </button>
+    </div>
+  </div>
+</div>

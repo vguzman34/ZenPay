@@ -1,0 +1,197 @@
+@if (loading()) {
+  <div class="page-container">
+    <div class="loading-skeleton">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-cards">
+        @for (_ of [1,2,3,4]; track _) {
+          <div class="skeleton-card glass-card"></div>
+        }
+      </div>
+    </div>
+  </div>
+} @else if (error(); as errMsg) {
+  <div class="page-container">
+    <div class="error-state glass-card">
+      <span class="material-symbols-rounded" style="font-size: 48px; color: var(--color-danger)">error</span>
+      <h2>Algo salió mal</h2>
+      <p>{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadCards()">Reintentar</button>
+    </div>
+  </div>
+} @else if (cards().length === 0) {
+  <div class="page-container">
+    <div class="empty-state glass-card">
+      <span class="material-symbols-rounded" style="font-size: 48px; color: var(--color-text-muted)">credit_card</span>
+      <h2>Sin tarjetas</h2>
+      <p>No tienes tarjetas registradas</p>
+    </div>
+  </div>
+} @else {
+  <div class="page-container animate-fade-in">
+    <header class="page-header">
+      <div class="header-left">
+        <h1 class="page-title">Mis Tarjetas</h1>
+        <p class="page-subtitle">Gestiona tus tarjetas de crédito, débito y virtuales</p>
+      </div>
+    </header>
+
+    <section class="cards-grid">
+      @for (card of cards(); track card.id) {
+        <div class="card-scene" (click)="selectCard(card.id)">
+          <div class="card-wrapper"
+               [class.is-flipped]="flippedCardId() === card.id"
+               [style.perspective]="'1000px'">
+            <div class="card-visual"
+                 [style.background]="'linear-gradient(135deg, ' + card.colorStart + ', ' + card.colorEnd + ')'">
+              <div class="card-glow"></div>
+              <div class="card-header">
+                <span class="card-type-icon"><span class="material-symbols-rounded">{{ getCardIcon(card.cardType) }}</span></span>
+                <span class="card-brand">{{ card.brand }}</span>
+              </div>
+              <div class="card-chip"><span class="material-symbols-rounded" style="font-size:1.8rem; color:rgba(255,255,255,0.8)">credit_card</span></div>
+              <div class="card-number">{{ getDisplayNumber(card) }}</div>
+              <div class="card-info-row">
+                <div class="card-info-item">
+                  <span class="card-info-label">Titular</span>
+                  <span class="card-info-value">{{ card.cardHolderName }}</span>
+                </div>
+                <div class="card-info-item">
+                  <span class="card-info-label">Vence</span>
+                  <span class="card-info-value">{{ card.expirationDate }}</span>
+                </div>
+              </div>
+              @if (card.isVirtual) {
+                <div class="card-virtual-badge">Virtual</div>
+              }
+              <div class="card-status-dot"
+                   [class.active]="card.status === 'ACTIVE'"
+                   [class.blocked]="card.status === 'BLOCKED'">
+              </div>
+            </div>
+          </div>
+          <div class="card-info-footer">
+            <span class="card-name">{{ card.brand === 'DEBITO' ? 'Débito Premium' : card.brand === 'VISA' && card.isVirtual ? 'Tarjeta Virtual' : card.brand + ' Infinite' }}</span>
+            <span class="card-limit-display">
+              {{ card.cardType === 'debito' ? 'Saldo: ' + formatCurrency(card.currentBalance) : 'Disponible: ' + formatCurrency(card.availableLimit) }}
+            </span>
+          </div>
+        </div>
+      }
+    </section>
+
+    @if (selectedCard(); as card) {
+      <div class="detail-panel animate-slide-up">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <h2 class="detail-title"><span class="material-symbols-rounded">{{ getCardIcon(card.cardType) }}</span> {{ card.brand === 'DEBITO' ? 'Débito Premium' : card.brand === 'VISA' && card.isVirtual ? 'Tarjeta Virtual' : card.brand + ' Infinite' }}</h2>
+            <span class="detail-subtitle">{{ card.maskedNumber }}</span>
+          </div>
+          <button class="detail-close" (click)="closeDetail()"><span class="material-symbols-rounded">close</span></button>
+        </div>
+
+        <div class="detail-card-mini"
+             [style.background]="'linear-gradient(135deg, ' + card.colorStart + ', ' + card.colorEnd + ')'">
+          <div class="mini-card-content">
+            <span class="mini-card-brand">{{ card.brand }}</span>
+            <span class="mini-card-number">{{ getDisplayNumber(card) }}</span>
+            <span class="mini-card-name">{{ card.cardHolderName }}</span>
+            <span class="mini-card-exp">{{ card.expirationDate }}</span>
+          </div>
+        </div>
+
+        <div class="detail-balances">
+          @if (card.cardType === 'debito') {
+            <div class="balance-item">
+              <span class="balance-item-label">Saldo Actual</span>
+              <span class="balance-item-value total">{{ formatCurrency(card.currentBalance) }}</span>
+            </div>
+            <div class="balance-item">
+              <span class="balance-item-label">Límite Diario</span>
+              <span class="balance-item-value available">{{ formatCurrency(card.creditLimit) }}</span>
+            </div>
+          } @else {
+            <div class="balance-item">
+              <span class="balance-item-label">Cupo Total</span>
+              <span class="balance-item-value total">{{ formatCurrency(card.creditLimit) }}</span>
+            </div>
+            <div class="balance-item">
+              <span class="balance-item-label">Cupo Usado</span>
+              <span class="balance-item-value used">{{ formatCurrency(card.usedLimit) }}</span>
+            </div>
+            <div class="balance-item">
+              <span class="balance-item-label">Cupo Disponible</span>
+              <span class="balance-item-value available">{{ formatCurrency(card.availableLimit) }}</span>
+            </div>
+          }
+          <div class="balance-item">
+            <span class="balance-item-label">Fecha de Corte</span>
+            <span class="balance-item-value info">Día {{ card.cutoffDate }}</span>
+          </div>
+          <div class="balance-item">
+            <span class="balance-item-label">Fecha de Pago</span>
+            <span class="balance-item-value info">Día {{ card.paymentDate }}</span>
+          </div>
+        </div>
+
+        <div class="detail-actions">
+          <button class="card-action-btn" (click)="toggleCardStatus(card.id)">
+            <span class="material-symbols-rounded">{{ card.status === 'ACTIVE' ? 'lock' : 'lock_open' }}</span>
+            {{ card.status === 'ACTIVE' ? 'Bloquear' : 'Desbloquear' }}
+          </button>
+          <button class="card-action-btn" (click)="toggleShowData()">
+            <span class="material-symbols-rounded">{{ showData() ? 'visibility_off' : 'visibility' }}</span>
+            {{ showData() ? 'Ocultar datos' : 'Ver datos' }}
+          </button>
+          <button class="card-action-btn" (click)="adjustLimit()">
+            <span class="material-symbols-rounded">tune</span>
+            Ajustar límites
+          </button>
+        </div>
+
+        @if (card.spendingByCategory.length > 0) {
+          <div class="stats-section">
+            <h3 class="stats-title">Gastos por Categoría</h3>
+            <div class="stats-bars">
+              @for (cat of card.spendingByCategory; track cat.label) {
+                <div class="stats-bar-item">
+                  <div class="stats-bar-header">
+                    <span class="stats-bar-icon">{{ cat.icon }}</span>
+                    <span class="stats-bar-label">{{ cat.label }}</span>
+                    <span class="stats-bar-pct">{{ cat.percentage }}%</span>
+                  </div>
+                  <div class="stats-bar-track">
+                    <div class="stats-bar-fill"
+                         [style.width.%]="cat.percentage"
+                         [style.background]="cat.color">
+                    </div>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+
+        @if (card.recentPurchases.length > 0) {
+          <div class="purchases-section">
+            <h3 class="purchases-title">Compras Recientes</h3>
+            <div class="purchases-list">
+              @for (p of card.recentPurchases; track $index) {
+                <div class="purchase-item">
+                  <span class="purchase-date">{{ p.date }}</span>
+                  <div class="purchase-info">
+                    <span class="purchase-desc">{{ p.description }}</span>
+                    <span class="purchase-cat">{{ p.category }}</span>
+                  </div>
+                  <div class="purchase-right">
+                    <span class="purchase-amount">-{{ formatCurrency(p.amount) }}</span>
+                    <span class="purchase-status status-completed">{{ p.status }}</span>
+                  </div>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+}

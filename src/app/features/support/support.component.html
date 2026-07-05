@@ -1,0 +1,139 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">💬 Soporte</h1>
+    <p class="page-subtitle">Centro de ayuda y atención al cliente</p>
+  </header>
+
+  <div class="tabs">
+    <button class="tab-btn" [class.active]="selectedTab() === 'mis-tickets'" (click)="selectedTab.set('mis-tickets'); selectedTicketId.set(null)">📋 Mis Tickets</button>
+    <button class="tab-btn" [class.active]="selectedTab() === 'nuevo-ticket'" (click)="selectedTab.set('nuevo-ticket')">➕ Nuevo Ticket</button>
+  </div>
+
+  @if (selectedTab() === 'mis-tickets') {
+    @if (!selectedTicket()) {
+      @if (loading() && tickets().length === 0) {
+        <div class="loading-state glass-card">
+          <p>Cargando tickets...</p>
+        </div>
+      } @else if (error() && tickets().length === 0) {
+        <div class="error-state glass-card">
+          <span class="error-icon">⚠️</span>
+          <p class="error-text">{{ error() }}</p>
+          <button class="btn-retry" (click)="loadTickets()">Reintentar</button>
+        </div>
+      } @else {
+        <section class="tickets-list animate-slide-up">
+          @if (tickets().length === 0) {
+            <div class="empty-state glass-card">
+              <span class="empty-icon">🎉</span>
+              <p class="empty-text">No tienes tickets abiertos</p>
+            </div>
+          }
+          @for (t of tickets(); track t.id) {
+            <div class="ticket-card glass-card" (click)="selectTicket(t.id)">
+              <div class="ticket-card-header">
+                <span class="ticket-priority">{{ getPriorityIcon(t.priority) }}</span>
+                <span class="ticket-subject">{{ t.subject }}</span>
+              </div>
+              <div class="ticket-card-body">
+                <span class="ticket-category">{{ t.category }}</span>
+                <span class="ticket-date">{{ t.createdAt }}</span>
+              </div>
+              <div class="ticket-card-footer">
+                <span class="status-badge" [class]="getStatusClass(t.status)">
+                  {{ getStatusLabel(t.status) }}
+                </span>
+              </div>
+            </div>
+          }
+        </section>
+      }
+    } @else {
+      @let ticket = selectedTicket()!;
+      <section class="ticket-detail animate-slide-up">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <h3 class="detail-title">{{ ticket.subject }}</h3>
+            <div class="detail-meta">
+              <span class="status-badge" [class]="getStatusClass(ticket.status)">{{ getStatusLabel(ticket.status) }}</span>
+              <span class="ticket-priority-badge">{{ getPriorityIcon(ticket.priority) }} {{ ticket.priority }}</span>
+              <span class="ticket-date">{{ ticket.createdAt }}</span>
+            </div>
+          </div>
+          <button class="detail-back" (click)="closeTicketDetail()">← Volver</button>
+        </div>
+        <div class="ticket-messages">
+          @if (loading()) {
+            <div class="loading-state">
+              <p>Cargando mensajes...</p>
+            </div>
+          }
+          @for (msg of selectedTicketMessages(); track msg.id) {
+            <div class="ticket-msg" [class.user]="!isAgentMessage(msg)" [class.agent]="isAgentMessage(msg)">
+              <div class="msg-avatar">{{ isAgentMessage(msg) ? '👩‍💼' : '👤' }}</div>
+              <div class="msg-content">
+                <span class="msg-author">{{ isAgentMessage(msg) ? msg.sender : 'Tú' }}</span>
+                <span class="msg-text">{{ msg.message }}</span>
+                <span class="msg-date">{{ msg.createdAt }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      </section>
+    }
+  }
+
+  @if (selectedTab() === 'nuevo-ticket') {
+    <section class="new-ticket-section animate-slide-up">
+      <div class="glass-card ticket-form">
+        <label class="form-label">Asunto</label>
+        <input type="text" class="form-input" placeholder="Describe brevemente tu problema" [ngModel]="newSubject()" (ngModelChange)="newSubject.set($event)" />
+
+        <label class="form-label">Categoría</label>
+        <select class="form-select" [ngModel]="newCategory()" (ngModelChange)="newCategory.set($event)">
+          <option value="general">General</option>
+          <option value="Cuentas">Cuentas</option>
+          <option value="Tarjetas">Tarjetas</option>
+          <option value="Transferencias">Transferencias</option>
+          <option value="Pagos">Pagos</option>
+          <option value="Seguridad">Seguridad</option>
+        </select>
+
+        <label class="form-label">Prioridad</label>
+        <div class="priority-selector">
+          @for (p of [{ value: 'low', label: 'Baja', icon: '📋' }, { value: 'medium', label: 'Media', icon: '⚡' }, { value: 'high', label: 'Alta', icon: '🔴' }]; track p.value) {
+            <button class="priority-btn" [class.active]="newPriority() === p.value" (click)="setPriority(p.value)">
+              {{ p.icon }} {{ p.label }}
+            </button>
+          }
+        </div>
+
+        <label class="form-label">Descripción</label>
+        <textarea class="form-textarea" rows="5" placeholder="Describe tu problema en detalle..." [ngModel]="newDescription()" (ngModelChange)="newDescription.set($event)"></textarea>
+
+        <button class="btn-submit" [disabled]="!newSubject().trim() || !newDescription().trim()" (click)="submitTicket()">
+          Enviar Ticket
+        </button>
+      </div>
+    </section>
+  }
+
+  <section class="faq-section">
+    <h2 class="faq-title">❓ Preguntas Frecuentes</h2>
+    <div class="faq-list">
+      @for (faq of faqItems; track $index) {
+        <div class="faq-item glass-card" [class.expanded]="expandedFaq() === $index">
+          <button class="faq-question" (click)="toggleFaq($index)">
+            <span>{{ faq.question }}</span>
+            <span class="faq-chevron">{{ expandedFaq() === $index ? '▲' : '▼' }}</span>
+          </button>
+          @if (expandedFaq() === $index) {
+            <div class="faq-answer">
+              <p>{{ faq.answer }}</p>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </section>
+</div>

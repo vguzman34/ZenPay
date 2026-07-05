@@ -1,0 +1,43 @@
+<aside class="sidebar" [class.collapsed]="collapsed()">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <span class="logo-icon">Z</span>
+      @if (!collapsed()) {
+        <span class="logo-text">ZenPay</span>
+      }
+    </div>
+    <button class="sidebar-close mobile-only" (click)="closeMobile()" aria-label="Cerrar menú">
+      ✕
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    @for (item of navItems; track item.route) {
+      <a
+        class="nav-item"
+        [routerLink]="item.route"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: false }"
+        (click)="closeMobile()"
+        [attr.title]="collapsed() ? item.label : null"
+      >
+        <span class="nav-icon">{{ item.icon }}</span>
+        @if (!collapsed()) {
+          <span class="nav-label">{{ item.label }}</span>
+        }
+      </a>
+    }
+  </nav>
+
+  @if (!collapsed()) {
+    <div class="sidebar-footer">
+      <div class="sidebar-brand">Banca Digital</div>
+    </div>
+  }
+</aside>
+
+@if (collapsed()) {
+  <div class="sidebar-collapse-toggle" (click)="toggleCollapsed()" title="Expandir menú">
+    <span>▶</span>
+  </div>
+}

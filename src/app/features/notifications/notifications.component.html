@@ -1,0 +1,77 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <div class="header-top">
+      <div class="header-left">
+        <h1 class="page-title">🔔 Notificaciones</h1>
+        @if (unreadCount() > 0) {
+          <span class="unread-badge">{{ unreadCount() }}</span>
+        }
+      </div>
+      @if (unreadCount() > 0) {
+        <button class="mark-all-btn" (click)="markAllAsRead()">✓ Marcar todas como leídas</button>
+      }
+    </div>
+    <p class="page-subtitle">Mantente al día con tus movimientos y alertas</p>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-state glass-card">
+      <p>Cargando notificaciones...</p>
+    </div>
+  } @else if (error(); as errMsg) {
+    <div class="error-state glass-card">
+      <span class="error-icon">⚠️</span>
+      <p class="error-text">{{ errMsg }}</p>
+      <button class="btn-retry" (click)="loadNotifications()">Reintentar</button>
+    </div>
+  } @else {
+    <div class="filter-chips">
+      <button class="filter-chip" [class.active]="activeFilter() === null" (click)="setFilter(null)">
+        Todas
+      </button>
+      @for (cat of categories; track cat.key) {
+        <button class="filter-chip" [class.active]="activeFilter() === cat.key" (click)="setFilter(cat.key)">
+          {{ cat.icon }} {{ cat.label }}
+        </button>
+      }
+    </div>
+
+    <section class="notifications-list">
+      @if (filteredNotifications().length === 0) {
+        <div class="empty-state glass-card">
+          <span class="empty-icon">🔕</span>
+          <p class="empty-text">No hay notificaciones</p>
+        </div>
+      }
+      @for (notif of filteredNotifications(); track notif.id) {
+        <div class="notification-item glass-card"
+             [class.unread]="!notif.read"
+             [style.--notif-color]="typeColors[notif.type]"
+             (click)="markAsRead(notif.id)">
+          <div class="notif-indicator"></div>
+          <div class="notif-icon-wrapper" [style.background]="typeColors[notif.type]">
+            <span class="notif-icon">{{ typeIcons[notif.type] }}</span>
+          </div>
+          <div class="notif-content">
+            <div class="notif-header">
+              <span class="notif-title" [class.bold]="!notif.read">{{ notif.title }}</span>
+              @if (getPriority(notif.type) === 'high') {
+                <span class="priority-badge priority-high">🔴 Importante</span>
+              } @else if (getPriority(notif.type) === 'medium') {
+                <span class="priority-badge priority-medium">⚡ Media</span>
+              }
+            </div>
+            <p class="notif-message">{{ notif.message }}</p>
+            <div class="notif-footer">
+              <span class="notif-type">{{ typeIcons[notif.type] }} {{ typeLabels[notif.type] }}</span>
+              <span class="notif-time">{{ formatDate(notif.createdAt) }} · {{ formatTime(notif.createdAt) }}</span>
+            </div>
+          </div>
+          @if (!notif.read) {
+            <span class="unread-dot"></span>
+          }
+        </div>
+      }
+    </section>
+  }
+</div>

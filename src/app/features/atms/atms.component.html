@@ -1,0 +1,157 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">🏦 Cajeros y Bancos Cercanos</h1>
+    <p class="page-subtitle">Encuentra cajeros automáticos cerca de ti</p>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-state glass-card">
+      <p>Cargando cajeros cercanos...</p>
+    </div>
+  } @else if (error(); as errMsg) {
+    <div class="error-state glass-card">
+      <span class="error-icon">⚠️</span>
+      <p class="error-text">{{ errMsg }}</p>
+      <button class="btn-retry" (click)="loadData()">Reintentar</button>
+    </div>
+  } @else {
+    <div class="atms-toolbar">
+      <div class="search-wrapper">
+        <span class="search-icon">🔍</span>
+        <input
+          type="text"
+          class="search-input"
+          placeholder="Buscar por banco, dirección..."
+          [ngModel]="searchQuery()"
+          (ngModelChange)="searchQuery.set($event); selectedAtmId.set(null)"
+        />
+      </div>
+      <button class="filter-btn" [class.active]="showFavoritesOnly()" (click)="showFavoritesOnly.update(v => !v)">
+        ⭐ Favoritos
+      </button>
+    </div>
+
+    @if (favorites().length > 0 && !showFavoritesOnly()) {
+      <section class="favorites-section">
+        <h3 class="section-title">⭐ Tus Favoritos</h3>
+        <div class="favorites-row">
+          @for (fav of favorites(); track fav.id) {
+            <button class="fav-chip" (click)="selectAtm(fav.id); searchQuery.set('')">
+              {{ fav.bankName }}
+            </button>
+          }
+        </div>
+      </section>
+    }
+
+    <div class="atms-layout">
+      <div class="atms-list">
+        @if (filteredAtms().length === 0) {
+          <div class="empty-state glass-card">
+            <span class="empty-icon">📍</span>
+            <p class="empty-text">No se encontraron cajeros</p>
+          </div>
+        }
+        @for (atm of filteredAtms(); track atm.id) {
+          <div class="atm-card glass-card"
+               [class.selected]="selectedAtmId() === atm.id"
+               [style.--atm-accent]="getBankColor(atm.bankName)"
+               (click)="selectAtm(atm.id)">
+            <div class="atm-card-header">
+              <div class="atm-bank-logo" [style.background]="getBankColor(atm.bankName)">
+                <span class="atm-bank-initial">{{ getBankInitial(atm.bankName) }}</span>
+              </div>
+              <div class="atm-bank-info">
+                <span class="atm-bank-name">{{ atm.bankName }}</span>
+                <span class="atm-name">{{ atm.name }}</span>
+              </div>
+              <button class="fav-toggle" [class.faved]="favoriteIds().has(atm.id)" (click)="toggleFavorite(atm.id); $event.stopPropagation()">
+                {{ favoriteIds().has(atm.id) ? '⭐' : '☆' }}
+              </button>
+            </div>
+            <div class="atm-card-body">
+              <span class="atm-address">📍 {{ atm.address }}</span>
+            </div>
+            <div class="atm-card-footer">
+              <span class="atm-distance">🚶 {{ formatDistance(atm.distance) }} ({{ formatWalkingTime(atm.walkingTime) }})</span>
+              <span class="atm-status" [class.open]="atm.isOpen" [class.closed]="!atm.isOpen">
+                {{ atm.isOpen ? '🟢 Abierto' : '🔴 Cerrado' }}
+              </span>
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (selectedAtm(); as atm) {
+        <div class="atm-detail animate-slide-up">
+          <div class="detail-header">
+            <div class="detail-header-left">
+              <div class="detail-bank-logo" [style.background]="getBankColor(atm.bankName)">
+                <span>{{ getBankInitial(atm.bankName) }}</span>
+              </div>
+              <div>
+                <h3 class="detail-name">{{ atm.name }}</h3>
+                <span class="detail-bank">{{ atm.bankName }}</span>
+              </div>
+            </div>
+            <button class="detail-close" (click)="closeDetail()">✕</button>
+          </div>
+
+          <div class="detail-body">
+            <div class="detail-info-row">
+              <span class="detail-label">📍 Dirección</span>
+              <span class="detail-value">{{ atm.address }}</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-label">🕐 Horario</span>
+              <span class="detail-value">{{ formatHours(atm) }}</span>
+            </div>
+            <div class="detail-info-row">
+              <span class="detail-label">📌 Estado</span>
+              <span class="detail-value">
+                <span class="atm-status" [class.open]="atm.isOpen" [class.closed]="!atm.isOpen">
+                  {{ atm.isOpen ? '🟢 Abierto' : '🔴 Cerrado' }}
+                </span>
+              </span>
+            </div>
+
+            <div class="detail-services">
+              <span class="detail-label">Servicios</span>
+              <div class="services-badges">
+                @for (svc of atm.services; track svc) {
+                  <span class="service-badge">✅ {{ svc }}</span>
+                }
+              </div>
+            </div>
+
+            <div class="detail-directions">
+              <h4 class="directions-title">🗺️ Indicaciones</h4>
+              <div class="timeline">
+                @for (step of directions(); track $index) {
+                  <div class="timeline-step">
+                    <div class="timeline-marker">
+                      <span class="timeline-number">{{ $index + 1 }}</span>
+                    </div>
+                    <div class="timeline-content">
+                      <span class="timeline-icon">{{ step.icon }}</span>
+                      <span class="timeline-text">{{ step.text }}</span>
+                    </div>
+                  </div>
+                }
+              </div>
+            </div>
+
+            <div class="detail-actions">
+              <button class="action-btn maps-btn" (click)="openMaps(atm.latitude, atm.longitude)">
+                🗺️ Google Maps
+              </button>
+              <button class="action-btn waze-btn" (click)="openWaze(atm.latitude, atm.longitude)">
+                🚗 Waze
+              </button>
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

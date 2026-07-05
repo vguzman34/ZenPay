@@ -1,0 +1,141 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <div class="header-left">
+      <h1 class="page-title">Inversiones</h1>
+      <p class="page-subtitle">Explora oportunidades de inversión y sigue tu portafolio</p>
+    </div>
+  </header>
+
+  @if (loading()) {
+    <div class="loading-skeleton">
+      <div class="skeleton-summary skeleton-pulse"></div>
+      <div class="skeleton-grid">
+        <div class="skeleton-card skeleton-pulse"></div>
+        <div class="skeleton-card skeleton-pulse"></div>
+        <div class="skeleton-card skeleton-pulse"></div>
+        <div class="skeleton-card skeleton-pulse"></div>
+      </div>
+    </div>
+  } @else if (error(); as errMsg) {
+    <div class="error-state">
+      <span class="material-symbols-rounded error-icon">error_outline</span>
+      <p class="error-message">{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadInvestments()">Reintentar</button>
+    </div>
+  } @else if (investments().length === 0) {
+    <div class="empty-state">
+      <span class="material-symbols-rounded empty-icon">trending_up</span>
+      <p class="empty-message">No tienes inversiones registradas</p>
+    </div>
+  } @else {
+    <div class="portfolio-summary glass-card">
+      <div class="portfolio-summary-header">
+        <span class="portfolio-summary-icon">💰</span>
+        <h2 class="portfolio-summary-title">Resumen del Portafolio</h2>
+      </div>
+      <div class="portfolio-metrics">
+        <div class="portfolio-metric">
+          <span class="metric-label">Total Invertido</span>
+          <span class="metric-value">{{ formatCurrency(totalInvested()) }}</span>
+        </div>
+        <div class="portfolio-metric">
+          <span class="metric-label">Valor Actual</span>
+          <span class="metric-value current">{{ formatCurrency(totalCurrentValue()) }}</span>
+        </div>
+        <div class="portfolio-metric">
+          <span class="metric-label">Ganancia / Pérdida</span>
+          <span class="metric-value gainloss" [class.positive]="totalGainLoss() >= 0" [class.negative]="totalGainLoss() < 0">
+            <span class="gainloss-sign">{{ totalGainLoss() >= 0 ? '+' : '' }}</span>
+            {{ formatCurrency(totalGainLoss()) }}
+            <span class="gainloss-percent">({{ totalGainLoss() >= 0 ? '+' : '' }}{{ totalPerformancePercent() }}%)</span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <section class="investments-grid">
+      @for (inv of investments(); track inv.id) {
+        <div class="investment-card glass-card"
+             [class.selected]="selectedInvestmentId() === inv.id"
+             (click)="selectInvestment(inv.id)">
+          <div class="investment-card-header">
+            <span class="investment-type-badge" [class.cdt]="inv.type === 'CDT'" [class.fondo]="inv.type === 'FUND'">
+              {{ inv.type === 'CDT' ? 'CDT' : 'Fondo' }}
+            </span>
+            <span class="status-badge status-{{ inv.status.toLowerCase() }}">{{ inv.status }}</span>
+          </div>
+          <h3 class="investment-card-name">{{ inv.name }}</h3>
+          <div class="investment-card-amounts">
+            <div class="invest-amount-item">
+              <span class="invest-amount-label">Invertido</span>
+              <span class="invest-amount-value">{{ formatCurrency(inv.amount) }}</span>
+            </div>
+            <div class="invest-amount-item">
+              <span class="invest-amount-label">Actual</span>
+              <span class="invest-amount-value current">{{ formatCurrency(inv.currentValue) }}</span>
+            </div>
+          </div>
+          <div class="investment-performance" [class.positive]="inv.interestRate >= 0" [class.negative]="inv.interestRate < 0">
+            <span class="performance-value">{{ performanceStr(inv) }}</span>
+          </div>
+          <div class="investment-dates">
+            <span class="invest-date">{{ inv.startDate }} → {{ inv.maturityDate }}</span>
+          </div>
+        </div>
+      }
+    </section>
+
+    @if (selectedInvestment(); as inv) {
+      <div class="detail-panel animate-slide-up">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <div>
+              <div class="detail-header-badges">
+                <span class="investment-type-badge" [class.cdt]="inv.type === 'CDT'" [class.fondo]="inv.type === 'FUND'">
+                  {{ inv.type === 'CDT' ? 'CDT' : 'Fondo' }}
+                </span>
+                <span class="status-badge status-{{ inv.status.toLowerCase() }}">{{ inv.status }}</span>
+              </div>
+              <h2 class="detail-title">{{ inv.name }}</h2>
+            </div>
+          </div>
+          <button class="detail-close" (click)="closeDetail()"><span class="material-symbols-rounded">close</span></button>
+        </div>
+
+        <div class="detail-amounts">
+          <div class="detail-amount-item">
+            <span class="detail-amount-label">Monto Invertido</span>
+            <span class="detail-amount-value">{{ formatCurrency(inv.amount) }}</span>
+          </div>
+          <div class="detail-amount-item">
+            <span class="detail-amount-label">Valor Actual</span>
+            <span class="detail-amount-value current">{{ formatCurrency(inv.currentValue) }}</span>
+          </div>
+          <div class="detail-amount-item">
+            <span class="detail-amount-label">Rendimiento</span>
+            <span class="detail-amount-value performance" [class.positive]="inv.interestRate >= 0" [class.negative]="inv.interestRate < 0">
+              {{ performanceStr(inv) }}
+            </span>
+          </div>
+          <div class="detail-amount-item">
+            <span class="detail-amount-label">Ganancia Neta</span>
+            <span class="detail-amount-value net" [class.positive]="inv.currentValue >= inv.amount" [class.negative]="inv.currentValue < inv.amount">
+              {{ formatCurrency(inv.currentValue - inv.amount) }}
+            </span>
+          </div>
+        </div>
+
+        <div class="detail-dates">
+          <div class="detail-date-item">
+            <span class="detail-date-label">Fecha de inicio</span>
+            <span class="detail-date-value">{{ inv.startDate }}</span>
+          </div>
+          <div class="detail-date-item">
+            <span class="detail-date-label">Fecha de vencimiento</span>
+            <span class="detail-date-value">{{ inv.maturityDate }}</span>
+          </div>
+        </div>
+      </div>
+    }
+  }
+</div>

@@ -1,0 +1,151 @@
+@if (loading()) {
+  <div class="page-container">
+    <div class="loading-skeleton">
+      <div class="skeleton-header"></div>
+      <div class="skeleton-cards">
+        @for (_ of [1,2,3]; track _) {
+          <div class="skeleton-card glass-card"></div>
+        }
+      </div>
+    </div>
+  </div>
+} @else if (error(); as errMsg) {
+  <div class="page-container">
+    <div class="error-state glass-card">
+      <span class="material-symbols-rounded" style="font-size: 48px; color: var(--color-danger)">error</span>
+      <h2>Algo salió mal</h2>
+      <p>{{ errMsg }}</p>
+      <button class="retry-btn" (click)="loadAccounts()">Reintentar</button>
+    </div>
+  </div>
+} @else if (accounts().length === 0) {
+  <div class="page-container">
+    <div class="empty-state glass-card">
+      <span class="material-symbols-rounded" style="font-size: 48px; color: var(--color-text-muted)">account_balance</span>
+      <h2>Sin cuentas</h2>
+      <p>No tienes cuentas bancarias registradas</p>
+    </div>
+  </div>
+} @else {
+  <div class="page-container animate-fade-in">
+    <header class="page-header">
+      <div class="header-left">
+        <h1 class="page-title">Mis Cuentas</h1>
+        <p class="page-subtitle">Administra tus cuentas bancarias y consulta tus saldos</p>
+      </div>
+    </header>
+
+    <section class="accounts-grid">
+      @for (acc of accounts(); track acc.id) {
+        <div class="account-card glass-card"
+             [class.selected]="selectedAccountId() === acc.id"
+             [style.--card-accent]="accountTypeColor[acc.type]"
+             (click)="selectAccount(acc.id)">
+          <div class="account-card-header">
+            <span class="account-type-badge" [style.background]="accountTypeColor[acc.type]">
+              {{ accountTypeLabel[acc.type] }}
+            </span>
+            <span class="account-status status-active">{{ acc.status }}</span>
+          </div>
+          <div class="account-card-body">
+            <span class="account-name">{{ acc.name }}</span>
+            @if (acc.alias) {
+              <span class="account-alias">{{ acc.alias }}</span>
+            }
+            <span class="account-number">{{ acc.number }}</span>
+          </div>
+          <div class="account-card-footer">
+            <span class="account-balance">{{ formatCurrency(acc.balance) }}</span>
+            <span class="account-last-move">Último movimiento: {{ acc.lastMovement }}</span>
+          </div>
+        </div>
+      }
+    </section>
+
+    @if (selectedAccount(); as acc) {
+      <div class="detail-panel animate-slide-up">
+        <div class="detail-header">
+          <div class="detail-header-left">
+            <h2 class="detail-title">{{ acc.name }}</h2>
+            <span class="detail-number">{{ acc.number }}</span>
+            @if (acc.alias) {
+              <span class="detail-alias">Alias: {{ acc.alias }}</span>
+            }
+          </div>
+          <button class="detail-close" (click)="closeDetail()"><span class="material-symbols-rounded">close</span></button>
+        </div>
+
+        <div class="detail-balances">
+          <div class="balance-item">
+            <span class="balance-item-label">Saldo Total</span>
+            <span class="balance-item-value total">{{ formatCurrency(acc.balance) }}</span>
+          </div>
+          <div class="balance-item">
+            <span class="balance-item-label">Saldo Disponible</span>
+            <span class="balance-item-value available">{{ formatCurrency(acc.availableBalance) }}</span>
+          </div>
+          <div class="balance-item">
+            <span class="balance-item-label">Saldo Retenido</span>
+            <span class="balance-item-value held">{{ formatCurrency(acc.heldBalance) }}</span>
+          </div>
+        </div>
+
+        <div class="quick-actions-row">
+          @for (action of quickActions; track action.action) {
+            <button class="quick-action-btn" (click)="quickAction(action.action)">
+              <span class="qab-icon"><span class="material-symbols-rounded">{{ action.icon }}</span></span>
+              <span class="qab-label">{{ action.label }}</span>
+            </button>
+          }
+        </div>
+
+        <div class="movements-section">
+          <div class="movements-header">
+            <h3 class="movements-title">Movimientos Recientes</h3>
+            @if (acc.movements.length > 3) {
+              <button class="movements-toggle" (click)="toggleMovements()">
+                {{ showAllMovements() ? 'Mostrar menos' : 'Ver todos (' + acc.movements.length + ')' }}
+              </button>
+            }
+          </div>
+          @if (acc.movements.length === 0) {
+            <div class="movements-empty">
+              <p>No hay movimientos registrados</p>
+            </div>
+          } @else {
+            <div class="movements-table">
+              <div class="movements-table-header">
+                <span class="mt-col-date">Fecha</span>
+                <span class="mt-col-desc">Descripción</span>
+                <span class="mt-col-amount">Monto</span>
+                <span class="mt-col-status">Estado</span>
+              </div>
+              @for (mov of displayedMovements(); track $index) {
+                <div class="movements-table-row" [class.income]="mov.type === 'INCOME'" [class.expense]="mov.type === 'EXPENSE'">
+                  <span class="mt-col-date">{{ mov.date }}</span>
+                  <span class="mt-col-desc">{{ mov.description }}</span>
+                  <span class="mt-col-amount">
+                    <span class="mov-amount-sign">{{ mov.type === 'INCOME' ? '+' : '-' }}</span>
+                    {{ formatCurrency(mov.amount) }}
+                  </span>
+                  <span class="mt-col-status">
+                    <span class="mov-status status-completed">{{ mov.status }}</span>
+                  </span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="export-actions">
+          <button class="export-btn" (click)="quickAction('download')">
+            <span class="material-symbols-rounded">description</span> Descargar PDF
+          </button>
+          <button class="export-btn" (click)="quickAction('download')">
+            <span class="material-symbols-rounded">bar_chart</span> Descargar Excel
+          </button>
+        </div>
+      </div>
+    }
+  </div>
+}

@@ -1,0 +1,257 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">Transferencias</h1>
+    <p class="page-subtitle">Envía dinero a tus cuentas o a terceros</p>
+  </header>
+
+@if (loading()) {
+  <div class="glass-card">
+    <div class="skeleton" style="height:32px;width:40%;margin-bottom:16px"></div>
+    <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+    <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+    <div class="skeleton" style="height:60px;width:100%;margin-bottom:8px"></div>
+    <div class="skeleton" style="height:48px;width:100%;margin-top:16px"></div>
+  </div>
+} @else if (error()) {
+  <div class="glass-card" style="text-align:center;padding:40px">
+    <span class="material-symbols-rounded" style="font-size:48px;color:var(--color-danger)">error</span>
+    <p style="margin:16px 0;color:var(--color-text-secondary)">{{ error() }}</p>
+    <button class="btn btn-primary" (click)="loadData()">Reintentar</button>
+  </div>
+} @else {
+
+  <div class="tabs">
+    @for (tab of tabs; track tab; let i = $index) {
+      <button class="tab" [class.active]="selectedTab() === i" (click)="selectTab(i)">
+        {{ tab }}
+      </button>
+    }
+    <div class="tab-indicator" [style.transform]="'translateX(' + selectedTab() * 100 + '%)'" [style.width]="'calc(100% / ' + tabs.length + ')'"></div>
+  </div>
+
+  @if (selectedTab() === 0) {
+    <div class="glass-card form-card">
+      <h2 class="section-title">Transferencia Rápida</h2>
+
+      <div class="form-group">
+        <label class="form-label">Desde</label>
+        <div class="bank-card-list">
+          @for (acc of accounts(); track acc.id) {
+            <div class="bank-card" [class.selected]="fromAccountId() === acc.id" (click)="selectFromAccount(acc.id)"
+                 [style.--card-bg]="acc.accountType === 'SAVINGS' ? 'linear-gradient(135deg, #6c5ce7, #a29bfe)' : acc.accountType === 'CHECKING' ? 'linear-gradient(135deg, #00cec9, #81ecec)' : 'linear-gradient(135deg, #fd79a8, #fab1a0)'">
+              <div class="bank-card-top">
+                <span class="bank-card-type">
+                  <span class="material-symbols-rounded bank-card-icon">
+                    {{ acc.accountType === 'SAVINGS' ? 'savings' : acc.accountType === 'CHECKING' ? 'account_balance' : 'phone_iphone' }}
+                  </span>
+                  {{ accountLabel(acc) }}
+                </span>
+                <span class="bank-card-balance">{{ formatCurrency(acc.balance) }}</span>
+              </div>
+              <div class="bank-card-number">**** {{ (acc.accountNumber || '0000').slice(-4) }}</div>
+              <div class="bank-card-chip"></div>
+            </div>
+          }
+          @empty {
+            <p class="empty-text">No hay cuentas disponibles</p>
+          }
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Para</label>
+        <div class="radio-group">
+          <label class="radio-item" [class.active]="transferType() === 'own'" (click)="setTransferType('own')">
+            <span class="radio-dot"></span> Mis cuentas
+          </label>
+          <label class="radio-item" [class.active]="transferType() === 'third'" (click)="setTransferType('third')">
+            <span class="radio-dot"></span> Terceros
+          </label>
+        </div>
+      </div>
+
+      @if (transferType() === 'own') {
+        <div class="form-group">
+          <label class="form-label">Cuenta destino</label>
+          <div class="bank-card-list">
+            @for (acc of accounts(); track acc.id) {
+              <div class="bank-card" [class.selected]="ownDestAccountId() === acc.id" (click)="selectOwnDest(acc.id)"
+                   [style.--card-bg]="acc.accountType === 'SAVINGS' ? 'linear-gradient(135deg, #6c5ce7, #a29bfe)' : acc.accountType === 'CHECKING' ? 'linear-gradient(135deg, #00cec9, #81ecec)' : 'linear-gradient(135deg, #fd79a8, #fab1a0)'">
+                <div class="bank-card-top">
+                  <span class="bank-card-type">
+                    <span class="material-symbols-rounded bank-card-icon">
+                      {{ acc.accountType === 'SAVINGS' ? 'savings' : acc.accountType === 'CHECKING' ? 'account_balance' : 'phone_iphone' }}
+                    </span>
+                    {{ accountLabel(acc) }}
+                  </span>
+                  <span class="bank-card-balance">{{ formatCurrency(acc.balance) }}</span>
+                </div>
+                <div class="bank-card-number">**** {{ (acc.accountNumber || '0000').slice(-4) }}</div>
+                <div class="bank-card-chip"></div>
+              </div>
+            }
+          </div>
+        </div>
+      } @else {
+        <div class="form-group">
+          <label class="form-label">Beneficiario</label>
+          @for (ben of beneficiaries(); track ben.id) {
+            <div class="beneficiary-card" [class.selected]="beneficiaryId() === ben.id" (click)="selectBeneficiary(ben.id)">
+              <span class="ben-avatar"><span class="material-symbols-rounded">person</span></span>
+              <div class="ben-info">
+                <span class="ben-name">{{ ben.name }}</span>
+                <span class="ben-details">{{ ben.accountNumber }} · {{ ben.bank }}</span>
+              </div>
+              <span class="ben-check">✓</span>
+            </div>
+          }
+          @empty {
+            <p class="empty-text">No hay beneficiarios registrados</p>
+          }
+        </div>
+
+        <details class="add-beneficiary">
+          <summary class="add-beneficiary-summary"><span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle">add</span> Añadir nuevo beneficiario</summary>
+          <div class="form-group">
+            <input class="form-input" [(ngModel)]="newBeneficiaryName" placeholder="Nombre completo" />
+          </div>
+          <div class="form-group">
+            <input class="form-input" [(ngModel)]="newBeneficiaryAccount" placeholder="Número de cuenta" />
+          </div>
+          <div class="form-group">
+            <input class="form-input" [(ngModel)]="newBeneficiaryBank" placeholder="Banco" />
+          </div>
+          <button class="btn btn-secondary" (click)="addNewBeneficiary()">Agregar</button>
+        </details>
+      }
+
+      <div class="form-group">
+        <label class="form-label">Monto</label>
+        <input class="form-input" type="number" [ngModel]="amount()" (ngModelChange)="amount.set($event)" placeholder="$0" min="1" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Descripción (opcional)</label>
+        <input class="form-input" [(ngModel)]="description" placeholder="Ej: Pago mensual" />
+      </div>
+
+      @if (errorMessage()) {
+        <div class="error-message"><span class="material-symbols-rounded" style="font-size:16px;vertical-align:middle;margin-right:4px">warning</span> {{ errorMessage() }}</div>
+      }
+
+      @if (!showConfirmation()) {
+        <button class="btn btn-primary btn-block" (click)="submitTransfer()">Transferir</button>
+      }
+    </div>
+  }
+
+  @if (selectedTab() === 1) {
+    @if (scheduledTransfers().length > 0) {
+      <div class="scheduled-summary glass-card">
+        <div class="summary-row">
+          <div class="summary-item">
+            <span class="summary-label">Programadas</span>
+            <span class="summary-value">{{ scheduledCount() }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Total del mes</span>
+            <span class="summary-value accent">{{ formatCurrency(scheduledTotal()) }}</span>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Próxima ejecución</span>
+            <span class="summary-value">{{ nextExecutionDate() ? scheduledDateFormat(nextExecutionDate()!) : '—' }}</span>
+          </div>
+        </div>
+      </div>
+    }
+    <div class="glass-card">
+      <h2 class="section-title">Transferencias Programadas</h2>
+      @for (s of scheduledTransfers(); track s.id) {
+        <div class="scheduled-card">
+          <div class="scheduled-main">
+            <div class="scheduled-icon">
+              <span class="material-symbols-rounded">schedule</span>
+            </div>
+            <div class="scheduled-body">
+              <span class="scheduled-beneficiary">{{ s.destinationName || s.description }}</span>
+              <span class="scheduled-details">
+                {{ s.destinationBank || 'Transferencia interna' }}
+                @if (s.destinationAccountNumber) {
+                  · {{ s.destinationAccountNumber }}
+                }
+              </span>
+              <span class="scheduled-meta">
+                <span class="meta-chip frequency">{{ frequencyLabel(s.frequency) }}</span>
+                <span class="meta-chip date">{{ scheduledDateFormat(s.scheduledDate) }}</span>
+                @if (s.status === 'PENDING') {
+                  <span class="meta-chip pending">Pendiente</span>
+                }
+              </span>
+            </div>
+            <div class="scheduled-amount-group">
+              <span class="scheduled-amount">{{ formatCurrency(s.amount) }}</span>
+            </div>
+          </div>
+          <div class="scheduled-actions">
+            <button class="btn-action execute" (click)="executeScheduledNow(s.id)" title="Ejecutar ahora">
+              <span class="material-symbols-rounded">play_arrow</span> Ejecutar
+            </button>
+            <button class="btn-action edit" title="Editar">
+              <span class="material-symbols-rounded">edit</span> Editar
+            </button>
+            <button class="btn-action cancel" (click)="cancelScheduled(s.id)" title="Cancelar">
+              <span class="material-symbols-rounded">cancel</span> Cancelar
+            </button>
+          </div>
+        </div>
+      }
+      @empty {
+        <p class="empty-text">No hay transferencias programadas</p>
+      }
+    </div>
+  }
+
+  @if (selectedTab() === 2) {
+    <div class="glass-card">
+      <h2 class="section-title">Historial de Transferencias</h2>
+      @for (t of transferHistory(); track t.id) {
+        <div class="history-item">
+          <div class="history-info">
+            <span class="history-dest">{{ t.description }}</span>
+            <span class="history-date">{{ t.createdAt }}</span>
+          </div>
+          <span class="history-amount">{{ formatCurrency(t.amount) }}</span>
+          <span class="status-badge {{ statusClass(t.status) }}">{{ statusLabel(t.status) }}</span>
+        </div>
+      }
+      @empty {
+        <p class="empty-text">No hay transferencias realizadas</p>
+      }
+    </div>
+  }
+
+  @if (showConfirmation()) {
+    <div class="modal-overlay">
+      <div class="modal glass-card">
+        <h3>Confirmar Transferencia</h3>
+        <p>¿Estás seguro de transferir <strong>{{ formatCurrency(amount()) }}</strong>?</p>
+        <div class="modal-actions">
+          <button class="btn btn-secondary" (click)="cancelTransfer()">Cancelar</button>
+          <button class="btn btn-primary" (click)="confirmTransfer()">Confirmar</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  @if (showSuccess()) {
+    <div class="modal-overlay">
+      <div class="modal glass-card success-modal">
+        <div class="success-icon"><span class="material-symbols-rounded" style="font-size:48px;color:var(--color-success)">check_circle</span></div>
+        <h3>Transferencia Exitosa</h3>
+        <p>Se transfirieron <strong>{{ formatCurrency(amount()) }}</strong> correctamente.</p>
+      </div>
+    </div>
+  }
+
+}
+</div>

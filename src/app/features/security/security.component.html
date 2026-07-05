@@ -1,0 +1,262 @@
+<div class="page-container animate-fade-in">
+  <header class="page-header">
+    <h1 class="page-title">Seguridad</h1>
+    <p class="page-subtitle">Protección y privacidad de tu cuenta ZenPay</p>
+  </header>
+
+  <div class="overview-section glass-card">
+    <div class="overview-shield">
+      <div class="shield-icon-wrapper">
+        <span class="material-symbols-rounded shield-icon">shield</span>
+      </div>
+      <span class="shield-badge">{{ securityLevel() }}</span>
+    </div>
+    <div class="overview-info">
+      <h2 class="overview-title">Tu cuenta está {{ protectionStatus() }}</h2>
+      <p class="overview-last">Último acceso: {{ lastAccess() }}</p>
+      <p class="overview-activity">{{ lastActivity() }}</p>
+    </div>
+    <div class="overview-score">
+      <div class="score-circle" [style.background]="scoreGradient()">
+        <div class="score-circle-inner">
+          <span class="score-value">{{ securityScore() }}</span>
+          <span class="score-max">/100</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="security-grid">
+    <div class="glass-card section-card">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="material-symbols-rounded section-icon">verified_user</span>
+          <h3 class="section-title">Autenticación Multifactor</h3>
+        </div>
+        <span class="status-badge" [class.active]="mfaEnabled()" [class.inactive]="!mfaEnabled()">
+          {{ mfaEnabled() ? 'Activado' : 'Desactivado' }}
+        </span>
+      </div>
+      <div class="section-body">
+        @if (mfaEnabled()) {
+          <div class="mfa-info">
+            <div class="mfa-method">
+              <span class="mfa-method-icon material-symbols-rounded">key</span>
+              <div class="mfa-method-detail">
+                <span class="mfa-method-label">Método principal</span>
+                <span class="mfa-method-value">{{ mfaMethod() }}</span>
+              </div>
+            </div>
+            <div class="mfa-backup">
+              <span class="mfa-method-icon material-symbols-rounded">phone_iphone</span>
+              <div class="mfa-method-detail">
+                <span class="mfa-method-label">Respaldo SMS</span>
+                <span class="mfa-method-value">{{ phoneBackup() }}</span>
+              </div>
+            </div>
+          </div>
+        } @else {
+          <p class="mfa-disabled-text">La autenticación multifactor está desactivada. Actívala para proteger tu cuenta.</p>
+        }
+      </div>
+      <div class="section-footer">
+        <label class="toggle-switch">
+          <input type="checkbox" [checked]="mfaEnabled()" (change)="toggleMfa()" />
+          <span class="toggle-slider"></span>
+        </label>
+        <span class="toggle-label">{{ mfaEnabled() ? 'Activado' : 'Desactivado' }}</span>
+        <button class="btn btn-outline" (click)="configureMfa()">Configurar método</button>
+      </div>
+    </div>
+
+    <div class="glass-card section-card">
+      <div class="section-header">
+        <div class="section-header-left">
+          <span class="material-symbols-rounded section-icon">lock</span>
+          <h3 class="section-title">Contraseña</h3>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="password-info">
+          <div class="password-field">
+            <span class="password-label">Última actualización</span>
+            <span class="password-value">{{ passwordLastUpdated() }}</span>
+          </div>
+          <div class="password-strength">
+            <span class="password-label">Fortaleza</span>
+            <div class="strength-bar">
+              <div class="strength-bar-fill" [style.width.%]="getStrengthPercent()" [style.background]="getStrengthColor()"></div>
+            </div>
+            <span class="strength-label" [style.color]="getStrengthColor()">{{ passwordStrength() }}</span>
+          </div>
+        </div>
+      </div>
+      <div class="section-footer">
+        <button class="btn btn-primary" (click)="changePassword()">
+          <span class="material-symbols-rounded btn-icon">refresh</span>
+          Cambiar contraseña
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-card section-card">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="material-symbols-rounded section-icon">devices</span>
+        <h3 class="section-title">Dispositivos Conectados</h3>
+      </div>
+      <span class="section-count">{{ devices().length }}</span>
+    </div>
+    <div class="section-body">
+      @if (loading() && devices().length === 0) {
+        <div class="loading-state">
+          <p>Cargando dispositivos...</p>
+        </div>
+      } @else if (error() && devices().length === 0) {
+        <div class="error-state">
+          <span class="error-icon">⚠️</span>
+          <p>{{ error() }}</p>
+        </div>
+      } @else {
+        <div class="devices-grid">
+          @for (device of devices(); track device.id) {
+            <div class="device-card">
+              <div class="device-icon-wrapper">
+                <span class="material-symbols-rounded device-icon">{{ getDeviceIcon(device.deviceType) }}</span>
+              </div>
+              <div class="device-info">
+                <span class="device-name">{{ device.deviceName }}</span>
+                <span class="device-os">{{ device.os }}</span>
+                <span class="device-location">
+                  <span class="material-symbols-rounded location-icon">location_on</span>
+                  {{ device.location }}
+                </span>
+                <span class="device-access">{{ device.lastUsedAt }}</span>
+              </div>
+              <div class="device-actions">
+                <span class="trust-badge" [class.trusted]="device.isTrusted" [class.untrusted]="!device.isTrusted">
+                  {{ device.isTrusted ? 'Confiable' : 'No confiable' }}
+                </span>
+                @if (!device.isTrusted) {
+                  <button class="btn btn-sm btn-danger-outline" (click)="removeDevice(device.id)">
+                    <span class="material-symbols-rounded btn-icon-small">logout</span>
+                    Cerrar sesión
+                  </button>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="glass-card section-card">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="material-symbols-rounded section-icon">language</span>
+        <h3 class="section-title">Sesiones Activas</h3>
+      </div>
+      <span class="section-count">{{ activeSessions().length }}</span>
+    </div>
+    <div class="section-body">
+      <div class="sessions-list">
+        @for (session of activeSessions(); track session.id) {
+          <div class="session-item">
+            <div class="session-icon-wrapper">
+              <span class="material-symbols-rounded session-icon">{{ session.icon }}</span>
+            </div>
+            <div class="session-info">
+              <span class="session-type">{{ session.type }}</span>
+              <span class="session-device">{{ session.device }}</span>
+              <div class="session-meta">
+                <span class="session-meta-item">
+                  <span class="material-symbols-rounded meta-icon">network_intel</span>
+                  IP {{ session.ip }}
+                </span>
+                <span class="session-meta-item">
+                  <span class="material-symbols-rounded meta-icon">location_on</span>
+                  {{ session.location }}
+                </span>
+                <span class="session-meta-item">
+                  <span class="material-symbols-rounded meta-icon">schedule</span>
+                  {{ session.startedAt | date:'short' }}
+                </span>
+              </div>
+            </div>
+            <button class="btn btn-sm btn-danger-outline" (click)="closeSession(session.id)">
+              <span class="material-symbols-rounded btn-icon-small">close</span>
+              Cerrar
+            </button>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="section-footer">
+      <button class="btn btn-danger" (click)="closeAllSessions()">
+        <span class="material-symbols-rounded btn-icon">logout</span>
+        Cerrar todas las sesiones
+      </button>
+    </div>
+  </div>
+
+  <div class="glass-card section-card">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="material-symbols-rounded section-icon">notifications</span>
+        <h3 class="section-title">Alertas de Seguridad</h3>
+      </div>
+      <span class="section-count">{{ securityAlerts().length }}</span>
+    </div>
+    <div class="section-body">
+      <div class="alerts-list">
+        @for (alert of securityAlerts(); track alert.id) {
+          <div class="alert-item" [class]="'alert-' + alert.type">
+            <div class="alert-icon-wrapper">
+              <span class="material-symbols-rounded alert-icon">{{ alert.icon }}</span>
+            </div>
+            <div class="alert-info">
+              <span class="alert-description">{{ alert.description }}</span>
+              <div class="alert-meta">
+                <span>{{ alert.date | date:'short' }}</span>
+                <span class="alert-dot"></span>
+                <span>{{ alert.location }}</span>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+
+  <div class="glass-card section-card">
+    <div class="section-header">
+      <div class="section-header-left">
+        <span class="material-symbols-rounded section-icon">privacy_tip</span>
+        <h3 class="section-title">Centro de Privacidad</h3>
+      </div>
+    </div>
+    <div class="section-body">
+      <div class="privacy-list">
+        @for (setting of privacySettings(); track setting.id) {
+          <div class="privacy-item">
+            <div class="privacy-info">
+              <span class="privacy-label">{{ setting.label }}</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" [checked]="setting.enabled" (change)="togglePrivacy(setting.id)" />
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        }
+      </div>
+    </div>
+    <div class="section-footer">
+      <button class="btn btn-outline" (click)="manageData()">
+        <span class="material-symbols-rounded btn-icon">settings</span>
+        Gestionar datos
+      </button>
+    </div>
+  </div>
+</div>
