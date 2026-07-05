@@ -1,59 +1,77 @@
-# ZenPay
+# ZenPay - Banca Digital
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.17.
+Plataforma financiera digital premium construida con **Angular 21** + **Spring Boot 3** + **PostgreSQL**. PWA instalable en iPhone y Android.
 
-## Development server
+## 🚀 Demo
 
-To start a local development server, run:
+- **Frontend**: https://zen-pay-5cep.vercel.app
+- **Backend**: https://zenpay-api.onrender.com
+- **Credenciales demo**: `vanessa@zenpay.com` / `admin123`
 
-```bash
-ng serve
+## 🛠 Stack
+
+| Capa | Tecnología |
+|---|---|
+| Frontend | Angular 21, Angular Material, PWA, SCSS |
+| Backend | Spring Boot 3, Spring Security, JWT, Flyway |
+| Base de datos | PostgreSQL 18 (Neon) |
+| Deploy | Vercel + Render |
+
+## ✨ Funcionalidades
+
+- Dashboard financiero con cards y gráficos
+- Transferencias bancarias y pagos QR
+- Recargas móviles y pago de servicios
+- Gestión de tarjetas, metas de ahorro, créditos e inversiones
+- Asistente IA integrado
+- Geolocalización de cajeros y bancos
+- Modo oscuro / claro
+- PWA instalable (offline-ready)
+
+## 🔐 Seguridad
+
+- Autenticación JWT con refresh token
+- CORS restringido por entorno
+- Contraseñas hasheadas con bcrypt
+- Migraciones Flyway versionadas
+- Variables de entorno para secretos
+
+## 📱 PWA
+
+- Manifest y service worker
+- Iconos SVG 192x192 y 512x512
+- Apple touch icon 180x180
+- Safe-area para iPhone X+
+- Responsive: iPhone 13/14/15, Android 360px+
+- Sidebar drawer tipo Nequi/Nubank
+
+## 🏗 Arquitectura
+
+```
+ZenPay/
+├── src/                    # Frontend Angular
+│   ├── app/
+│   │   ├── features/       # Módulos funcionales
+│   │   ├── layout/         # Sidebar, navbar, main-layout
+│   │   └── shared/         # Servicios, stores, modelos
+│   ├── environments/       # Config por entorno
+│   └── styles.scss         # Estilos globales
+├── backend/                # Backend Spring Boot
+│   ├── src/main/java/      # Código Java
+│   ├── src/main/resources/ # Config, migraciones Flyway
+│   └── Dockerfile          # Multi-stage build
+├── public/                 # PWA assets
+└── vercel.json             # Config deploy Vercel
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+## 🚦 Cómo ejecutar local
 
 ```bash
-ng generate component component-name
+# Frontend
+npm install
+ng serve  # → http://localhost:4200
+
+# Backend (requiere PostgreSQL local)
+cd backend
+./mvnw spring-boot:run
 ```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

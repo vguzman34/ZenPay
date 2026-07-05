@@ -8,6 +8,16 @@
 /backend/target/
 *.jar
 
+# Logs and local files
+*.log
+*.err
+*.bat
+*.ps1
+run.ps1
+login-test.json
+start*.bat
+start*.ps1
+
 # Node
 /node_modules
 npm-debug.log
