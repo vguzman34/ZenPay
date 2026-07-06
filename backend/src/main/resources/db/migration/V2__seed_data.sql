@@ -1,8 +1,8 @@
 -- Seed admin user password: Admin123 (BCrypt hash)
 INSERT INTO users (id, email, password, full_name, phone, photo_url, role, enabled, account_non_locked, last_login_at, created_at, updated_at)
 VALUES
-    (uuid_generate_v4(), 'cliente@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Vanesa Gómez', '+573001234567', 'https://ui-avatars.com/api/?name=Vanesa+Gomez&background=6C63FF&color=fff', 'ROLE_ADMIN', true, true, NOW(), NOW(), NOW()),
-    (uuid_generate_v4(), 'usuario@zenpay.com', '$2a$10$lTdAPwuyFU4nUkRSk0W6ge2WLHk0KQxc0T9mj1vzfiUXofZKyMnDe', 'Carlos López', '+573009876543', 'https://ui-avatars.com/api/?name=Carlos+Lopez&background=FF6B6B&color=fff', 'ROLE_USER', true, true, NOW(), NOW(), NOW());
+    (uuid_generate_v4(), 'cliente@zenpay.com', '$2b$10$TyADFHRlFFU6NT9q3313v.2K5uqHqKjJxgYs4s4dKyItLXFjnydJm', 'Vanesa Gómez', '+573001234567', 'https://ui-avatars.com/api/?name=Vanesa+Gomez&background=6C63FF&color=fff', 'ROLE_ADMIN', true, true, NOW(), NOW(), NOW()),
+    (uuid_generate_v4(), 'usuario@zenpay.com', '$2b$10$TyADFHRlFFU6NT9q3313v.2K5uqHqKjJxgYs4s4dKyItLXFjnydJm', 'Carlos López', '+573009876543', 'https://ui-avatars.com/api/?name=Carlos+Lopez&background=FF6B6B&color=fff', 'ROLE_USER', true, true, NOW(), NOW(), NOW());
 
 DO $$
 DECLARE
